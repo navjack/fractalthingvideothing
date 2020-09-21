@@ -1,0 +1,31 @@
+﻿cl : Command line warning D9002: ignoring unknown option '/arch:IA32'
+  Source.cpp
+n:\frac\fractal\fractal\olcpixelgameengine.h(966): warning C4068: unknown pragma
+n:\frac\fractal\fractal\olcpixelgameengine.h(1013): warning C4068: unknown pragma
+n:\frac\fractal\fractal\olcpixelgameengine.h(1014): warning C4083: expected '('; found identifier 'count'
+n:\frac\fractal\fractal\olcpixelgameengine.h(1016): warning C4083: expected '('; found identifier 'count'
+n:\frac\fractal\fractal\olcpixelgameengine.h(2659): warning C4068: unknown pragma
+n:\frac\fractal\fractal\olcpixelgameengine.h(3172): warning C4068: unknown pragma
+n:\frac\fractal\fractal\olcpixelgameengine.h(3173): warning C4003: not enough arguments for function-like macro invocation 'min'
+n:\frac\fractal\fractal\olcpixelgameengine.h(3173): warning C4083: expected '('; found identifier 'count'
+n:\frac\fractal\fractal\source.cpp(313): warning C4267: 'argument': conversion from 'size_t' to 'T', possible loss of data
+          with
+          [
+              T=int32_t
+          ]
+n:\frac\fractal\fractal\source.cpp(314): warning C4267: 'argument': conversion from 'size_t' to 'T', possible loss of data
+          with
+          [
+              T=int32_t
+          ]
+n:\frac\fractal\fractal\source.cpp(455): warning C4267: 'argument': conversion from 'size_t' to 'T', possible loss of data
+          with
+          [
+              T=int32_t
+          ]
+n:\frac\fractal\fractal\source.cpp(456): warning C4267: 'argument': conversion from 'size_t' to 'T', possible loss of data
+          with
+          [
+              T=int32_t
+          ]
+  fractal-justbadonpurpose.vcxproj -> N:\frac\justbad\Release\fractal-justbadonpurpose.exe

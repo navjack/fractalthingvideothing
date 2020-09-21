@@ -1,0 +1,317 @@
+<html>
+<head>
+<title>Listing of WCHAR.H</title>
+</head>
+<body bgcolor="FFFFFF">
+<h4>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;WCHAR.H&#160;&#160;&#160;&#160;&#160;&#160;&#160;<font size=-1>coverage:&#160  0.00&#160;%func&#160;&#160;&#160;&#160;  0.00&#160;%block</font></h4>
+<hr size=1 noshade>
+<pre>
+     1) <a name="l1" style="background-color: #ffffff">//</a>
+     2) <a name="l2" style="background-color: #ffffff">// wchar.h</a>
+     3) <a name="l3" style="background-color: #ffffff">//</a>
+     4) <a name="l4" style="background-color: #ffffff">//      Copyright (c) Microsoft Corporation. All rights reserved.</a>
+     5) <a name="l5" style="background-color: #ffffff">//</a>
+     6) <a name="l6" style="background-color: #ffffff">// All of the types, macros, and function declarations for all wide-character</a>
+     7) <a name="l7" style="background-color: #ffffff">// related functionality.  Most of the functionality is in the #included</a>
+     8) <a name="l8" style="background-color: #ffffff">// &lt;corecrt_wxxxx.h&gt; headers, which are also #included by other public headers.</a>
+     9) <a name="l9" style="background-color: #ffffff">//</a>
+    10) <a name="l10" style="background-color: #ffffff">#pragma once</a>
+    11) <a name="l11" style="background-color: #ffffff">#ifndef _INC_WCHAR // include guard for 3rd party interop</a>
+    12) <a name="l12" style="background-color: #ffffff">#define _INC_WCHAR</a>
+    13) <a name="l13" style="background-color: #ffffff"></a>
+    14) <a name="l14" style="background-color: #ffffff">#include &lt;corecrt.h&gt;</a>
+    15) <a name="l15" style="background-color: #ffffff">#include &lt;corecrt_memcpy_s.h&gt;</a>
+    16) <a name="l16" style="background-color: #ffffff">#include &lt;corecrt_wconio.h&gt;</a>
+    17) <a name="l17" style="background-color: #ffffff">#include &lt;corecrt_wctype.h&gt;</a>
+    18) <a name="l18" style="background-color: #ffffff">#include &lt;corecrt_wdirect.h&gt;</a>
+    19) <a name="l19" style="background-color: #ffffff">#include &lt;corecrt_wio.h&gt;</a>
+    20) <a name="l20" style="background-color: #ffffff">#include &lt;corecrt_wprocess.h&gt;</a>
+    21) <a name="l21" style="background-color: #ffffff">#include &lt;corecrt_wstdio.h&gt;</a>
+    22) <a name="l22" style="background-color: #ffffff">#include &lt;corecrt_wstdlib.h&gt;</a>
+    23) <a name="l23" style="background-color: #ffffff">#include &lt;corecrt_wstring.h&gt;</a>
+    24) <a name="l24" style="background-color: #ffffff">#include &lt;corecrt_wtime.h&gt;</a>
+    25) <a name="l25" style="background-color: #ffffff">#include &lt;sys/stat.h&gt;</a>
+    26) <a name="l26" style="background-color: #ffffff">#include &lt;sys/types.h&gt;</a>
+    27) <a name="l27" style="background-color: #ffffff">#include &lt;vcruntime_string.h&gt;</a>
+    28) <a name="l28" style="background-color: #ffffff"></a>
+    29) <a name="l29" style="background-color: #ffffff">#pragma warning(push)</a>
+    30) <a name="l30" style="background-color: #ffffff">#pragma warning(disable: _UCRT_DISABLED_WARNINGS)</a>
+    31) <a name="l31" style="background-color: #ffffff">_UCRT_DISABLE_CLANG_WARNINGS</a>
+    32) <a name="l32" style="background-color: #ffffff"></a>
+    33) <a name="l33" style="background-color: #ffffff">_CRT_BEGIN_C_HEADER</a>
+    34) <a name="l34" style="background-color: #ffffff"></a>
+    35) <a name="l35" style="background-color: #ffffff"></a>
+    36) <a name="l36" style="background-color: #ffffff"></a>
+    37) <a name="l37" style="background-color: #ffffff">#define WCHAR_MIN 0x0000</a>
+    38) <a name="l38" style="background-color: #ffffff">#define WCHAR_MAX 0xffff</a>
+    39) <a name="l39" style="background-color: #ffffff"></a>
+    40) <a name="l40" style="background-color: #ffffff"></a>
+    41) <a name="l41" style="background-color: #ffffff"></a>
+    42) <a name="l42" style="background-color: #ffffff">typedef wchar_t _Wint_t;</a>
+    43) <a name="l43" style="background-color: #ffffff"></a>
+    44) <a name="l44" style="background-color: #ffffff"></a>
+    45) <a name="l45" style="background-color: #ffffff"></a>
+    46) <a name="l46" style="background-color: #ffffff">#if _CRT_FUNCTIONS_REQUIRED</a>
+    47) <a name="l47" style="background-color: #ffffff"></a>
+    48) <a name="l48" style="background-color: #ffffff">    _Check_return_opt_ _Success_(return != 0) _Ret_z_</a>
+    49) <a name="l49" style="background-color: #ffffff">    _ACRTIMP wchar_t* __cdecl _wsetlocale(</a>
+    50) <a name="l50" style="background-color: #ffffff">        _In_       int            _Category,</a>
+    51) <a name="l51" style="background-color: #ffffff">        _In_opt_z_ wchar_t const* _Locale</a>
+    52) <a name="l52" style="background-color: #ffffff">        );</a>
+    53) <a name="l53" style="background-color: #ffffff"></a>
+    54) <a name="l54" style="background-color: #ffffff">    _Check_return_opt_</a>
+    55) <a name="l55" style="background-color: #ffffff">    _ACRTIMP _locale_t __cdecl _wcreate_locale(</a>
+    56) <a name="l56" style="background-color: #ffffff">        _In_   int            _Category,</a>
+    57) <a name="l57" style="background-color: #ffffff">        _In_z_ wchar_t const* _Locale</a>
+    58) <a name="l58" style="background-color: #ffffff">        );</a>
+    59) <a name="l59" style="background-color: #ffffff"></a>
+    60) <a name="l60" style="background-color: #ffffff"></a>
+    61) <a name="l61" style="background-color: #ffffff"></a>
+    62) <a name="l62" style="background-color: #ffffff">    _ACRTIMP wint_t __cdecl btowc(</a>
+    63) <a name="l63" style="background-color: #ffffff">        _In_ int _Ch</a>
+    64) <a name="l64" style="background-color: #ffffff">        );</a>
+    65) <a name="l65" style="background-color: #ffffff"></a>
+    66) <a name="l66" style="background-color: #ffffff">    _ACRTIMP size_t __cdecl mbrlen(</a>
+    67) <a name="l67" style="background-color: #ffffff">        _In_reads_bytes_opt_(_SizeInBytes) _Pre_opt_z_ char const* _Ch,</a>
+    68) <a name="l68" style="background-color: #ffffff">        _In_                                           size_t      _SizeInBytes,</a>
+    69) <a name="l69" style="background-color: #ffffff">        _Inout_                                        mbstate_t*  _State</a>
+    70) <a name="l70" style="background-color: #ffffff">        );</a>
+    71) <a name="l71" style="background-color: #ffffff"></a>
+    72) <a name="l72" style="background-color: #ffffff">    _ACRTIMP size_t __cdecl mbrtowc(</a>
+    73) <a name="l73" style="background-color: #ffffff">        _Pre_maybenull_ _Post_z_                       wchar_t*    _DstCh,</a>
+    74) <a name="l74" style="background-color: #ffffff">        _In_reads_bytes_opt_(_SizeInBytes) _Pre_opt_z_ char const* _SrcCh,</a>
+    75) <a name="l75" style="background-color: #ffffff">        _In_                                           size_t      _SizeInBytes,</a>
+    76) <a name="l76" style="background-color: #ffffff">        _Inout_                                        mbstate_t*  _State</a>
+    77) <a name="l77" style="background-color: #ffffff">        );</a>
+    78) <a name="l78" style="background-color: #ffffff"></a>
+    79) <a name="l79" style="background-color: #ffffff">    _Success_(return == 0)</a>
+    80) <a name="l80" style="background-color: #ffffff">    _ACRTIMP errno_t __cdecl mbsrtowcs_s(</a>
+    81) <a name="l81" style="background-color: #ffffff">        _Out_opt_                         size_t*      _Retval,</a>
+    82) <a name="l82" style="background-color: #ffffff">        _Out_writes_opt_z_(_Size)         wchar_t*     _Dst,</a>
+    83) <a name="l83" style="background-color: #ffffff">        _In_                              size_t       _Size,</a>
+    84) <a name="l84" style="background-color: #ffffff">        _Deref_pre_opt_z_                 char const** _PSrc,</a>
+    85) <a name="l85" style="background-color: #ffffff">        _In_                              size_t       _N,</a>
+    86) <a name="l86" style="background-color: #ffffff">        _Inout_                           mbstate_t*   _State</a>
+    87) <a name="l87" style="background-color: #ffffff">        );</a>
+    88) <a name="l88" style="background-color: #ffffff"></a>
+    89) <a name="l89" style="background-color: #ffffff">    __DEFINE_CPP_OVERLOAD_SECURE_FUNC_1_3(</a>
+    90) <a name="l90" style="background-color: #ffffff">        _Success_(return == 0)</a>
+    91) <a name="l91" style="background-color: #ffffff">        errno_t, mbsrtowcs_s,</a>
+    92) <a name="l92" style="background-color: #ffffff">        _Out_opt_                         size_t*,      _Retval,</a>
+    93) <a name="l93" style="background-color: #ffffff">        _Post_z_                          wchar_t,      _Dest,</a>
+    94) <a name="l94" style="background-color: #ffffff">        _Inout_ _Deref_prepost_opt_valid_ char const**, _PSource,</a>
+    95) <a name="l95" style="background-color: #ffffff">        _In_                              size_t,       _Count,</a>
+    96) <a name="l96" style="background-color: #ffffff">        _Inout_                           mbstate_t*,   _State</a>
+    97) <a name="l97" style="background-color: #ffffff">        )</a>
+    98) <a name="l98" style="background-color: #ffffff"></a>
+    99) <a name="l99" style="background-color: #ffffff">    __DEFINE_CPP_OVERLOAD_STANDARD_NFUNC_0_3_SIZE(</a>
+   100) <a name="l100" style="background-color: #ffffff">        _Success_(return == 0) _ACRTIMP, mbsrtowcs,</a>
+   101) <a name="l101" style="background-color: #ffffff">        _Out_writes_opt_z_(_Count),           wchar_t,      _Dest,</a>
+   102) <a name="l102" style="background-color: #ffffff">        _Deref_pre_opt_z_                 char const**, _PSrc,</a>
+   103) <a name="l103" style="background-color: #ffffff">        _In_                              size_t,       _Count,</a>
+   104) <a name="l104" style="background-color: #ffffff">        _Inout_                           mbstate_t*,   _State</a>
+   105) <a name="l105" style="background-color: #ffffff">        )</a>
+   106) <a name="l106" style="background-color: #ffffff"></a>
+   107) <a name="l107" style="background-color: #ffffff">    _Success_(return == 0)</a>
+   108) <a name="l108" style="background-color: #ffffff">    _ACRTIMP errno_t __cdecl wcrtomb_s(</a>
+   109) <a name="l109" style="background-color: #ffffff">        _Out_opt_                        size_t*    _Retval,</a>
+   110) <a name="l110" style="background-color: #ffffff">        _Out_writes_opt_z_(_SizeInBytes) char*      _Dst,</a>
+   111) <a name="l111" style="background-color: #ffffff">        _In_                             size_t     _SizeInBytes,</a>
+   112) <a name="l112" style="background-color: #ffffff">        _In_                             wchar_t    _Ch,</a>
+   113) <a name="l113" style="background-color: #ffffff">        _Inout_opt_                      mbstate_t* _State</a>
+   114) <a name="l114" style="background-color: #ffffff">        );</a>
+   115) <a name="l115" style="background-color: #ffffff"></a>
+   116) <a name="l116" style="background-color: #ffffff">    __DEFINE_CPP_OVERLOAD_SECURE_FUNC_1_2(</a>
+   117) <a name="l117" style="background-color: #ffffff">        _Success_(return == 0)</a>
+   118) <a name="l118" style="background-color: #ffffff">        errno_t, wcrtomb_s,</a>
+   119) <a name="l119" style="background-color: #ffffff">        _Out_opt_                 size_t*,    _Retval,</a>
+   120) <a name="l120" style="background-color: #ffffff">        _Out_writes_opt_z_(_Size) char,       _Dest,</a>
+   121) <a name="l121" style="background-color: #ffffff">        _In_                      wchar_t,    _Source,</a>
+   122) <a name="l122" style="background-color: #ffffff">        _Inout_opt_               mbstate_t*, _State</a>
+   123) <a name="l123" style="background-color: #ffffff">        )</a>
+   124) <a name="l124" style="background-color: #ffffff"></a>
+   125) <a name="l125" style="background-color: #ffffff">    __DEFINE_CPP_OVERLOAD_STANDARD_FUNC_0_2_SIZE(</a>
+   126) <a name="l126" style="background-color: #ffffff">        _ACRTIMP, wcrtomb,</a>
+   127) <a name="l127" style="background-color: #ffffff">        _Pre_maybenull_ _Post_z_, char,       _Dest,</a>
+   128) <a name="l128" style="background-color: #ffffff">        _In_                      wchar_t,    _Source,</a>
+   129) <a name="l129" style="background-color: #ffffff">        _Inout_opt_              mbstate_t*, _State</a>
+   130) <a name="l130" style="background-color: #ffffff">        )</a>
+   131) <a name="l131" style="background-color: #ffffff"></a>
+   132) <a name="l132" style="background-color: #ffffff">    _Success_(return == 0)</a>
+   133) <a name="l133" style="background-color: #ffffff">    _ACRTIMP errno_t __cdecl wcsrtombs_s(</a>
+   134) <a name="l134" style="background-color: #ffffff">        _Out_opt_                                         size_t*         _Retval,</a>
+   135) <a name="l135" style="background-color: #ffffff">        _Out_writes_bytes_to_opt_(_SizeInBytes, *_Retval) char*           _Dst,</a>
+   136) <a name="l136" style="background-color: #ffffff">        _In_                                              size_t          _SizeInBytes,</a>
+   137) <a name="l137" style="background-color: #ffffff">        _Inout_ _Deref_prepost_z_                         wchar_t const** _Src,</a>
+   138) <a name="l138" style="background-color: #ffffff">        _In_                                              size_t          _Size,</a>
+   139) <a name="l139" style="background-color: #ffffff">        _Inout_opt_                                       mbstate_t*      _State</a>
+   140) <a name="l140" style="background-color: #ffffff">        );</a>
+   141) <a name="l141" style="background-color: #ffffff"></a>
+   142) <a name="l142" style="background-color: #ffffff">    __DEFINE_CPP_OVERLOAD_SECURE_FUNC_1_3(</a>
+   143) <a name="l143" style="background-color: #ffffff">        _Success_(return == 0)</a>
+   144) <a name="l144" style="background-color: #ffffff">        errno_t, wcsrtombs_s,</a>
+   145) <a name="l145" style="background-color: #ffffff">        _Out_opt_                 size_t*,         _Retval,</a>
+   146) <a name="l146" style="background-color: #ffffff">        _Out_writes_opt_z_(_Size) char,            _Dest,</a>
+   147) <a name="l147" style="background-color: #ffffff">        _Inout_ _Deref_prepost_z_ wchar_t const**, _PSrc,</a>
+   148) <a name="l148" style="background-color: #ffffff">        _In_                      size_t,          _Count,</a>
+   149) <a name="l149" style="background-color: #ffffff">        _Inout_opt_               mbstate_t*,      _State</a>
+   150) <a name="l150" style="background-color: #ffffff">        )</a>
+   151) <a name="l151" style="background-color: #ffffff"></a>
+   152) <a name="l152" style="background-color: #ffffff">    __DEFINE_CPP_OVERLOAD_STANDARD_NFUNC_0_3_SIZE(</a>
+   153) <a name="l153" style="background-color: #ffffff">        _ACRTIMP, wcsrtombs,</a>
+   154) <a name="l154" style="background-color: #ffffff">        _Pre_maybenull_ _Post_z_, char,            _Dest,</a>
+   155) <a name="l155" style="background-color: #ffffff">        _Inout_ _Deref_prepost_z_ wchar_t const**, _PSource,</a>
+   156) <a name="l156" style="background-color: #ffffff">        _In_                      size_t,          _Count,</a>
+   157) <a name="l157" style="background-color: #ffffff">        _Inout_opt_               mbstate_t*,      _State</a>
+   158) <a name="l158" style="background-color: #ffffff">        )</a>
+   159) <a name="l159" style="background-color: #ffffff"></a>
+   160) <a name="l160" style="background-color: #ffffff">    _ACRTIMP int __cdecl wctob(</a>
+   161) <a name="l161" style="background-color: #ffffff">        _In_ wint_t _WCh</a>
+   162) <a name="l162" style="background-color: #ffffff">        );</a>
+   163) <a name="l163" style="background-color: #ffffff"></a>
+   164) <a name="l164" style="background-color: #ffffff">    #if __STDC_WANT_SECURE_LIB__</a>
+   165) <a name="l165" style="background-color: #ffffff"></a>
+   166) <a name="l166" style="background-color: #ffffff">        _Success_(return == 0)</a>
+   167) <a name="l167" style="background-color: #ffffff">        errno_t __CRTDECL wmemcpy_s(</a>
+   168) <a name="l168" style="background-color: #ffffff">            _Out_writes_to_opt_(_N1, _N) wchar_t*       _S1,</a>
+   169) <a name="l169" style="background-color: #ffffff">            _In_                         rsize_t        _N1,</a>
+   170) <a name="l170" style="background-color: #ffffff">            _In_reads_opt_(_N)           wchar_t const* _S2,</a>
+   171) <a name="l171" style="background-color: #ffffff">            _In_                         rsize_t        _N</a>
+   172) <a name="l172" style="background-color: #ffffff">            );</a>
+   173) <a name="l173" style="background-color: #ffffff"></a>
+   174) <a name="l174" style="background-color: #ffffff">        _Success_(return == 0)</a>
+   175) <a name="l175" style="background-color: #ffffff">        errno_t __CRTDECL wmemmove_s(</a>
+   176) <a name="l176" style="background-color: #ffffff">            _Out_writes_to_opt_(_N1, _N) wchar_t*       _S1,</a>
+   177) <a name="l177" style="background-color: #ffffff">            _In_                         rsize_t        _N1,</a>
+   178) <a name="l178" style="background-color: #ffffff">            _In_reads_opt_(_N)           wchar_t const* _S2,</a>
+   179) <a name="l179" style="background-color: #ffffff">            _In_                         rsize_t        _N</a>
+   180) <a name="l180" style="background-color: #ffffff">            );</a>
+   181) <a name="l181" style="background-color: #ffffff"></a>
+   182) <a name="l182" style="background-color: #ffffff">    #endif // __STDC_WANT_SECURE_LIB__</a>
+   183) <a name="l183" style="background-color: #ffffff"></a>
+   184) <a name="l184" style="background-color: #ffffff">    __inline int __CRTDECL fwide(</a>
+   185) <a name="l185" style="background-color: #ffffff">        _In_opt_ FILE* _F,</a>
+   186) <a name="l186" style="background-color: #ffffff">        _In_     int   _M</a>
+   187) <a name="l187" style="background-color: #ffffff">        )</a>
+   188) <a name="l188" style="background-color: #ffffff">    {</a>
+   189) <a name="l189" style="background-color: #ffffff">        _CRT_UNUSED(_F);</a>
+   190) <a name="l190" style="background-color: #ffffff">        return (_M);</a>
+   191) <a name="l191" style="background-color: #ffffff">    }</a>
+   192) <a name="l192" style="background-color: #ffffff"></a>
+   193) <a name="l193" style="background-color: #ffffff">    __inline int __CRTDECL mbsinit(</a>
+   194) <a name="l194" style="background-color: #ffffff">        _In_opt_ mbstate_t const* _P</a>
+   195) <a name="l195" style="background-color: #ffffff">        )</a>
+   196) <a name="l196" style="background-color: #ffffff">    {</a>
+   197) <a name="l197" style="background-color: #ffffff">        return _P == NULL || _P-&gt;_Wchar == 0;</a>
+   198) <a name="l198" style="background-color: #ffffff">    }</a>
+   199) <a name="l199" style="background-color: #ffffff"></a>
+   200) <a name="l200" style="background-color: #ffffff">    __inline wchar_t _CONST_RETURN* __CRTDECL wmemchr(</a>
+   201) <a name="l201" style="background-color: #ffffff">        _In_reads_(_N) wchar_t const* _S,</a>
+   202) <a name="l202" style="background-color: #ffffff">        _In_           wchar_t        _C,</a>
+   203) <a name="l203" style="background-color: #ffffff">        _In_           size_t         _N</a>
+   204) <a name="l204" style="background-color: #ffffff">        )</a>
+   205) <a name="l205" style="background-color: #ffffff">    {</a>
+   206) <a name="l206" style="background-color: #ffffff">        for (; 0 &lt; _N; ++_S, --_N)</a>
+   207) <a name="l207" style="background-color: #ffffff">            if (*_S == _C)</a>
+   208) <a name="l208" style="background-color: #ffffff">                return (wchar_t _CONST_RETURN*)_S;</a>
+   209) <a name="l209" style="background-color: #ffffff"></a>
+   210) <a name="l210" style="background-color: #ffffff">        return 0;</a>
+   211) <a name="l211" style="background-color: #ffffff">    }</a>
+   212) <a name="l212" style="background-color: #ffffff"></a>
+   213) <a name="l213" style="background-color: #ffffff">    __inline int __CRTDECL wmemcmp(</a>
+   214) <a name="l214" style="background-color: #ffffff">        _In_reads_(_N) wchar_t const* _S1,</a>
+   215) <a name="l215" style="background-color: #ffffff">        _In_reads_(_N) wchar_t const* _S2,</a>
+   216) <a name="l216" style="background-color: #ffffff">        _In_           size_t         _N</a>
+   217) <a name="l217" style="background-color: #ffffff">        )</a>
+   218) <a name="l218" style="background-color: #ffffff">    {</a>
+   219) <a name="l219" style="background-color: #ffffff">        for (; 0 &lt; _N; ++_S1, ++_S2, --_N)</a>
+   220) <a name="l220" style="background-color: #ffffff">            if (*_S1 != *_S2)</a>
+   221) <a name="l221" style="background-color: #ffffff">                return *_S1 &lt; *_S2 ? -1 : 1;</a>
+   222) <a name="l222" style="background-color: #ffffff"></a>
+   223) <a name="l223" style="background-color: #ffffff">        return 0;</a>
+   224) <a name="l224" style="background-color: #ffffff">    }</a>
+   225) <a name="l225" style="background-color: #ffffff"></a>
+   226) <a name="l226" style="background-color: #ffffff">    _Post_equal_to_(_S1)</a>
+   227) <a name="l227" style="background-color: #ffffff">    _At_buffer_(_S1, _Iter_, _N, _Post_satisfies_(_S1[_Iter_] == _S2[_Iter_]))</a>
+   228) <a name="l228" style="background-color: #ffffff">    __inline _CRT_INSECURE_DEPRECATE_MEMORY(wmemcpy_s)</a>
+   229) <a name="l229" style="background-color: #ffffff">    wchar_t* __CRTDECL </a><a style="background-color: #ffcccc">wmemcpy(</a>
+   230) <a name="l230" style="background-color: #ffcccc">        _Out_writes_all_(_N) wchar_t*       _S1,</a>
+   231) <a name="l231" style="background-color: #ffcccc">        _In_reads_(_N)       wchar_t const* _S2,</a>
+   232) <a name="l232" style="background-color: #ffcccc">        _In_                 size_t         _N</a>
+   233) <a name="l233" style="background-color: #ffcccc">        )</a>
+   234) <a name="l234" style="background-color: #ffcccc">    {</a>
+   235) <a name="l235" style="background-color: #ffcccc">        #pragma warning(suppress: 6386) // Buffer overrun</a>
+   236) <a name="l236" style="background-color: #ffcccc">        return (wchar_t*)memcpy(_S1, _S2, _N*sizeof(wchar_t));</a>
+   237) <a name="l237" style="background-color: #ffcccc">    }</a>
+   238) <a name="l238" style="background-color: #ffffff"></a>
+   239) <a name="l239" style="background-color: #ffffff">    __inline _CRT_INSECURE_DEPRECATE_MEMORY(wmemmove_s)</a>
+   240) <a name="l240" style="background-color: #ffffff">    wchar_t* __CRTDECL </a><a style="background-color: #ffcccc">wmemmove(</a>
+   241) <a name="l241" style="background-color: #ffcccc">        _Out_writes_all_opt_(_N) wchar_t*       _S1,</a>
+   242) <a name="l242" style="background-color: #ffcccc">        _In_reads_opt_(_N)       wchar_t const* _S2,</a>
+   243) <a name="l243" style="background-color: #ffcccc">        _In_                     size_t         _N</a>
+   244) <a name="l244" style="background-color: #ffcccc">        )</a>
+   245) <a name="l245" style="background-color: #ffcccc">    {</a>
+   246) <a name="l246" style="background-color: #ffcccc">        #pragma warning(suppress: 6386) // Buffer overrun</a>
+   247) <a name="l247" style="background-color: #ffcccc">        return (wchar_t*)memmove(_S1, _S2, _N*sizeof(wchar_t));</a>
+   248) <a name="l248" style="background-color: #ffcccc">    }</a>
+   249) <a name="l249" style="background-color: #ffffff"></a>
+   250) <a name="l250" style="background-color: #ffffff">    _Post_equal_to_(_S)</a>
+   251) <a name="l251" style="background-color: #ffffff">    _At_buffer_(_S, _Iter_, _N, _Post_satisfies_(_S[_Iter_] == _C))</a>
+   252) <a name="l252" style="background-color: #ffffff">    __inline wchar_t* __CRTDECL wmemset(</a>
+   253) <a name="l253" style="background-color: #ffffff">        _Out_writes_all_(_N) wchar_t* _S,</a>
+   254) <a name="l254" style="background-color: #ffffff">        _In_                 wchar_t  _C,</a>
+   255) <a name="l255" style="background-color: #ffffff">        _In_                 size_t   _N</a>
+   256) <a name="l256" style="background-color: #ffffff">        )</a>
+   257) <a name="l257" style="background-color: #ffffff">    {</a>
+   258) <a name="l258" style="background-color: #ffffff">        wchar_t *_Su = _S;</a>
+   259) <a name="l259" style="background-color: #ffffff">        for (; 0 &lt; _N; ++_Su, --_N)</a>
+   260) <a name="l260" style="background-color: #ffffff">        {</a>
+   261) <a name="l261" style="background-color: #ffffff">            *_Su = _C;</a>
+   262) <a name="l262" style="background-color: #ffffff">        }</a>
+   263) <a name="l263" style="background-color: #ffffff">        return _S;</a>
+   264) <a name="l264" style="background-color: #ffffff">    }</a>
+   265) <a name="l265" style="background-color: #ffffff"></a>
+   266) <a name="l266" style="background-color: #ffffff">    #ifdef __cplusplus</a>
+   267) <a name="l267" style="background-color: #ffffff"></a>
+   268) <a name="l268" style="background-color: #ffffff">        extern &quot;C++&quot; inline wchar_t* __CRTDECL wmemchr(</a>
+   269) <a name="l269" style="background-color: #ffffff">            _In_reads_(_N) wchar_t* _S,</a>
+   270) <a name="l270" style="background-color: #ffffff">            _In_           wchar_t  _C,</a>
+   271) <a name="l271" style="background-color: #ffffff">            _In_           size_t   _N</a>
+   272) <a name="l272" style="background-color: #ffffff">            )</a>
+   273) <a name="l273" style="background-color: #ffffff">        {</a>
+   274) <a name="l274" style="background-color: #ffffff">            wchar_t const* const _SC = _S;</a>
+   275) <a name="l275" style="background-color: #ffffff">            return const_cast&lt;wchar_t*&gt;(wmemchr(_SC, _C, _N));</a>
+   276) <a name="l276" style="background-color: #ffffff">        }</a>
+   277) <a name="l277" style="background-color: #ffffff"></a>
+   278) <a name="l278" style="background-color: #ffffff">    #endif // __cplusplus</a>
+   279) <a name="l279" style="background-color: #ffffff"></a>
+   280) <a name="l280" style="background-color: #ffffff">#endif // _CRT_FUNCTIONS_REQUIRED</a>
+   281) <a name="l281" style="background-color: #ffffff"></a>
+   282) <a name="l282" style="background-color: #ffffff"></a>
+   283) <a name="l283" style="background-color: #ffffff">_CRT_END_C_HEADER</a>
+   284) <a name="l284" style="background-color: #ffffff">_UCRT_RESTORE_CLANG_WARNINGS</a>
+   285) <a name="l285" style="background-color: #ffffff">#pragma warning(pop) // _UCRT_DISABLED_WARNINGS</a>
+   286) <a name="l286" style="background-color: #ffffff">#endif // _INC_WCHAR</a>
+</pre>
+<hr size=1 noshade>
+<table border=0 cellpadding=3 cellspacing=0 width="100%" style="color:black;font-weight:normal;font-family:Verdana,Arial;font-size:xx-small">
+<td width="50%">
+<table border=0 cellpadding=3 cellspacing=0>
+<tr>
+<td>
+<a target="_new" href="http://www.intel.com"><img src="__IntelR.gif" border="0"></a>
+</td>
+<td style="font-size:xx-small">
+<i>generated by </i><BR><a target="_new" href="http://software.intel.com">Intel(R) C++/Fortran Compiler code-coverage tool</a>
+</td>
+</tr>
+</table>
+</td>
+<td>
+<table border=0 cellpadding=3 cellspacing=0 width="50%">
+<tr><a>Web-Page Owner: <a href="mailto:nobody">Nobody</a></tr>
+</table>
+</td>
+</table>
+</body>
+</html>

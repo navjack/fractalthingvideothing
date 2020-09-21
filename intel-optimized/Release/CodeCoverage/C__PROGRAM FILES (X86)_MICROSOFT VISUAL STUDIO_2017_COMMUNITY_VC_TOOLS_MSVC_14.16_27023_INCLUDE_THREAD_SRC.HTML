@@ -1,0 +1,302 @@
+<html>
+<head>
+<title>Listing of THREAD</title>
+</head>
+<body bgcolor="FFFFFF">
+<h4>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;THREAD&#160;&#160;&#160;&#160;&#160;&#160;&#160;<font size=-1>coverage:&#160 100.00&#160;%func&#160;&#160;&#160;&#160; 73.53&#160;%block</font></h4>
+<hr size=1 noshade>
+<pre>
+     1) <a name="l1" style="background-color: #ffffff">// thread standard header</a>
+     2) <a name="l2" style="background-color: #ffffff">#pragma once</a>
+     3) <a name="l3" style="background-color: #ffffff">#ifndef _THREAD_</a>
+     4) <a name="l4" style="background-color: #ffffff">#define _THREAD_</a>
+     5) <a name="l5" style="background-color: #ffffff">#ifndef RC_INVOKED</a>
+     6) <a name="l6" style="background-color: #ffffff"></a>
+     7) <a name="l7" style="background-color: #ffffff"> #ifdef _M_CEE</a>
+     8) <a name="l8" style="background-color: #ffffff">  #error &lt;thread&gt; is not supported when compiling with /clr or /clr:pure.</a>
+     9) <a name="l9" style="background-color: #ffffff"> #endif /* _M_CEE */</a>
+    10) <a name="l10" style="background-color: #ffffff"></a>
+    11) <a name="l11" style="background-color: #ffffff">#include &lt;exception&gt;</a>
+    12) <a name="l12" style="background-color: #ffffff">#include &lt;iosfwd&gt;</a>
+    13) <a name="l13" style="background-color: #ffffff">#include &lt;functional&gt;</a>
+    14) <a name="l14" style="background-color: #ffffff">#include &lt;chrono&gt;</a>
+    15) <a name="l15" style="background-color: #ffffff">#include &lt;memory&gt;</a>
+    16) <a name="l16" style="background-color: #ffffff">#include &lt;tuple&gt;</a>
+    17) <a name="l17" style="background-color: #ffffff"></a>
+    18) <a name="l18" style="background-color: #ffffff">#include &lt;thr/xthread&gt;</a>
+    19) <a name="l19" style="background-color: #ffffff">#include &lt;thr/xtimec.h&gt;</a>
+    20) <a name="l20" style="background-color: #ffffff"></a>
+    21) <a name="l21" style="background-color: #ffffff"> #pragma pack(push,_CRT_PACKING)</a>
+    22) <a name="l22" style="background-color: #ffffff"> #pragma warning(push,_STL_WARNING_LEVEL)</a>
+    23) <a name="l23" style="background-color: #ffffff"> #pragma warning(disable: _STL_DISABLED_WARNINGS)</a>
+    24) <a name="l24" style="background-color: #ffffff"> _STL_DISABLE_CLANG_WARNINGS</a>
+    25) <a name="l25" style="background-color: #ffffff"> #pragma push_macro(&quot;new&quot;)</a>
+    26) <a name="l26" style="background-color: #ffffff"> #undef new</a>
+    27) <a name="l27" style="background-color: #ffffff"></a>
+    28) <a name="l28" style="background-color: #ffffff">_STD_BEGIN</a>
+    29) <a name="l29" style="background-color: #ffffff">class thread</a>
+    30) <a name="l30" style="background-color: #ffffff">	{	// class for observing and managing threads</a>
+    31) <a name="l31" style="background-color: #ffffff">public:</a>
+    32) <a name="l32" style="background-color: #ffffff">	class id;</a>
+    33) <a name="l33" style="background-color: #ffffff"></a>
+    34) <a name="l34" style="background-color: #ffffff">	typedef void *native_handle_type;</a>
+    35) <a name="l35" style="background-color: #ffffff"></a>
+    36) <a name="l36" style="background-color: #ffffff">	thread() noexcept</a>
+    37) <a name="l37" style="background-color: #ffffff">		{	// construct with no thread</a>
+    38) <a name="l38" style="background-color: #ffffff">		_Thr_set_null(_Thr);</a>
+    39) <a name="l39" style="background-color: #ffffff">		}</a>
+    40) <a name="l40" style="background-color: #ffffff"></a>
+    41) <a name="l41" style="background-color: #ffffff"></a>
+    42) <a name="l42" style="background-color: #ffffff">	template&lt;class _Fn,</a>
+    43) <a name="l43" style="background-color: #ffffff">		class... _Args,</a>
+    44) <a name="l44" style="background-color: #ffffff">		class = enable_if_t&lt;!is_same_v&lt;remove_cv_t&lt;remove_reference_t&lt;_Fn&gt;&gt;, thread&gt;&gt;&gt;</a>
+    45) <a name="l45" style="background-color: #ffffff">		explicit thread(_Fn&amp;&amp; _Fx, _Args&amp;&amp;... _Ax)</a>
+    46) <a name="l46" style="background-color: #ffffff">		{	// construct with _Fx(_Ax...)</a>
+    47) <a name="l47" style="background-color: #ffffff">		_Launch(&amp;_Thr,</a>
+    48) <a name="l48" style="background-color: #ffffff">			_STD make_unique&lt;tuple&lt;decay_t&lt;_Fn&gt;, decay_t&lt;_Args&gt;...&gt; &gt;(</a>
+    49) <a name="l49" style="background-color: #ffffff">				_STD forward&lt;_Fn&gt;(_Fx), _STD forward&lt;_Args&gt;(_Ax)...));</a>
+    50) <a name="l50" style="background-color: #fafad2">		}</a>
+    51) <a name="l51" style="background-color: #ffffff"></a>
+    52) <a name="l52" style="background-color: #ffffff"></a>
+    53) <a name="l53" style="background-color: #ffffff">	~thread() noexcept</a>
+    54) <a name="l54" style="background-color: #ffffff">		{	// clean up</a>
+    55) <a name="l55" style="background-color: #ffffff">		if (joinable())</a>
+    56) <a name="l56" style="background-color: #ffff99">			_STD terminate();</a>
+    57) <a name="l57" style="background-color: #ffffff">		}</a>
+    58) <a name="l58" style="background-color: #ffffff"></a>
+    59) <a name="l59" style="background-color: #ffffff">	thread(thread&amp;&amp; _Other) noexcept</a>
+    60) <a name="l60" style="background-color: #ffffff">		: _Thr(_Other._Thr)</a>
+    61) <a name="l61" style="background-color: #ffffff">		{	// move from _Other</a>
+    62) <a name="l62" style="background-color: #ffffff">		_Thr_set_null(_Other._Thr);</a>
+    63) <a name="l63" style="background-color: #ffffff">		}</a>
+    64) <a name="l64" style="background-color: #ffffff"></a>
+    65) <a name="l65" style="background-color: #ffffff">	thread&amp; operator=(thread&amp;&amp; _Other) noexcept</a>
+    66) <a name="l66" style="background-color: #ffffff">		{	// move from _Other</a>
+    67) <a name="l67" style="background-color: #ffffff">		return (_Move_thread(_Other));</a>
+    68) <a name="l68" style="background-color: #ffffff">		}</a>
+    69) <a name="l69" style="background-color: #ffffff"></a>
+    70) <a name="l70" style="background-color: #ffffff">	thread(const thread&amp;) = delete;</a>
+    71) <a name="l71" style="background-color: #ffffff">	thread&amp; operator=(const thread&amp;) = delete;</a>
+    72) <a name="l72" style="background-color: #ffffff"></a>
+    73) <a name="l73" style="background-color: #ffffff">	void swap(thread&amp; _Other) noexcept</a>
+    74) <a name="l74" style="background-color: #ffffff">		{	// swap with _Other</a>
+    75) <a name="l75" style="background-color: #ffffff">		_STD swap(_Thr, _Other._Thr);</a>
+    76) <a name="l76" style="background-color: #ffffff">		}</a>
+    77) <a name="l77" style="background-color: #ffffff"></a>
+    78) <a name="l78" style="background-color: #ffffff">	_NODISCARD bool joinable() const noexcept</a>
+    79) <a name="l79" style="background-color: #ffffff">		{	// return true if this thread can be joined</a>
+    80) <a name="l80" style="background-color: #ffffff">		return (!_Thr_is_null(_Thr));</a>
+    81) <a name="l81" style="background-color: #ffffff">		}</a>
+    82) <a name="l82" style="background-color: #ffffff"></a>
+    83) <a name="l83" style="background-color: #ffffff">	void join();</a>
+    84) <a name="l84" style="background-color: #ffffff"></a>
+    85) <a name="l85" style="background-color: #ffffff">	void detach()</a>
+    86) <a name="l86" style="background-color: #ffffff">		{	// detach thread</a>
+    87) <a name="l87" style="background-color: #ffffff">		if (!joinable())</a>
+    88) <a name="l88" style="background-color: #ffffff">			_Throw_Cpp_error(_INVALID_ARGUMENT);</a>
+    89) <a name="l89" style="background-color: #ffffff">		_Thrd_detachX(_Thr);</a>
+    90) <a name="l90" style="background-color: #ffffff">		_Thr_set_null(_Thr);</a>
+    91) <a name="l91" style="background-color: #ffffff">		}</a>
+    92) <a name="l92" style="background-color: #ffffff"></a>
+    93) <a name="l93" style="background-color: #ffffff">	_NODISCARD id get_id() const noexcept;</a>
+    94) <a name="l94" style="background-color: #ffffff"></a>
+    95) <a name="l95" style="background-color: #ffffff">	_NODISCARD static unsigned int hardware_concurrency() noexcept</a>
+    96) <a name="l96" style="background-color: #ffffff">		{	// return number of hardware thread contexts</a>
+    97) <a name="l97" style="background-color: #ffffff">		return (_Thrd_hardware_concurrency());</a>
+    98) <a name="l98" style="background-color: #ffffff">		}</a>
+    99) <a name="l99" style="background-color: #ffffff"></a>
+   100) <a name="l100" style="background-color: #ffffff">	_NODISCARD native_handle_type native_handle()</a>
+   101) <a name="l101" style="background-color: #ffffff">		{	// return Win32 HANDLE as void *</a>
+   102) <a name="l102" style="background-color: #ffffff">		return (_Thr._Hnd);</a>
+   103) <a name="l103" style="background-color: #ffffff">		}</a>
+   104) <a name="l104" style="background-color: #ffffff"></a>
+   105) <a name="l105" style="background-color: #ffffff">private:</a>
+   106) <a name="l106" style="background-color: #ffffff">	thread&amp; _Move_thread(thread&amp; _Other)</a>
+   107) <a name="l107" style="background-color: #ffffff">		{	// move from _Other</a>
+   108) <a name="l108" style="background-color: #ffffff">		if (joinable())</a>
+   109) <a name="l109" style="background-color: #ffff99">			_STD terminate();</a>
+   110) <a name="l110" style="background-color: #ffffff">		_Thr = _Other._Thr;</a>
+   111) <a name="l111" style="background-color: #ffffff">		_Thr_set_null(_Other._Thr);</a>
+   112) <a name="l112" style="background-color: #ffffff">		return (*this);</a>
+   113) <a name="l113" style="background-color: #ffffff">		}</a>
+   114) <a name="l114" style="background-color: #ffffff"></a>
+   115) <a name="l115" style="background-color: #ffffff">	_Thrd_t _Thr;</a>
+   116) <a name="l116" style="background-color: #ffffff">	};</a>
+   117) <a name="l117" style="background-color: #ffffff"></a>
+   118) <a name="l118" style="background-color: #ffffff">	namespace this_thread {</a>
+   119) <a name="l119" style="background-color: #ffffff">_NODISCARD thread::id get_id() noexcept;</a>
+   120) <a name="l120" style="background-color: #ffffff"></a>
+   121) <a name="l121" style="background-color: #ffffff">inline void yield() noexcept</a>
+   122) <a name="l122" style="background-color: #ffffff">	{	// give up balance of time slice</a>
+   123) <a name="l123" style="background-color: #ffffff">	_Thrd_yield();</a>
+   124) <a name="l124" style="background-color: #ffffff">	}</a>
+   125) <a name="l125" style="background-color: #ffffff"></a>
+   126) <a name="l126" style="background-color: #ffffff">inline void sleep_until(const stdext::threads::xtime *_Abs_time)</a>
+   127) <a name="l127" style="background-color: #ffffff">	{	// sleep until _Abs_time</a>
+   128) <a name="l128" style="background-color: #ffffff">	_Thrd_sleep(_Abs_time);</a>
+   129) <a name="l129" style="background-color: #ffffff">	}</a>
+   130) <a name="l130" style="background-color: #ffffff"></a>
+   131) <a name="l131" style="background-color: #ffffff">template&lt;class _Rep,</a>
+   132) <a name="l132" style="background-color: #ffffff">	class _Period&gt; inline</a>
+   133) <a name="l133" style="background-color: #ffffff">	void sleep_for(const chrono::duration&lt;_Rep, _Period&gt;&amp; _Rel_time)</a>
+   134) <a name="l134" style="background-color: #ffffff">	{	// sleep for duration</a>
+   135) <a name="l135" style="background-color: #ffffff">	stdext::threads::xtime _Tgt = _To_xtime(_Rel_time);</a>
+   136) <a name="l136" style="background-color: #ffffff">	this_thread::sleep_until(&amp;_Tgt);</a>
+   137) <a name="l137" style="background-color: #ffffff">	}</a>
+   138) <a name="l138" style="background-color: #ffffff"></a>
+   139) <a name="l139" style="background-color: #ffffff">template&lt;class _Clock,</a>
+   140) <a name="l140" style="background-color: #ffffff">	class _Duration&gt; inline</a>
+   141) <a name="l141" style="background-color: #ffffff">	void sleep_until(</a>
+   142) <a name="l142" style="background-color: #ffffff">		const chrono::time_point&lt;_Clock, _Duration&gt;&amp; _Abs_time)</a>
+   143) <a name="l143" style="background-color: #ffffff">	{	// sleep until time point</a>
+   144) <a name="l144" style="background-color: #ffffff">	this_thread::sleep_for(_Abs_time.time_since_epoch() - _Clock::now().time_since_epoch());</a>
+   145) <a name="l145" style="background-color: #ffffff">	}</a>
+   146) <a name="l146" style="background-color: #ffffff">	}	// namespace this_thread</a>
+   147) <a name="l147" style="background-color: #ffffff"></a>
+   148) <a name="l148" style="background-color: #ffffff">class thread::id</a>
+   149) <a name="l149" style="background-color: #ffffff">	{	// thread id</a>
+   150) <a name="l150" style="background-color: #ffffff">public:</a>
+   151) <a name="l151" style="background-color: #ffffff">	id() noexcept</a>
+   152) <a name="l152" style="background-color: #ffffff">		: _Id(0)</a>
+   153) <a name="l153" style="background-color: #ffffff">		{	// id for no thread</a>
+   154) <a name="l154" style="background-color: #ffffff">		}</a>
+   155) <a name="l155" style="background-color: #ffffff"></a>
+   156) <a name="l156" style="background-color: #ffffff">	template&lt;class _Ch,</a>
+   157) <a name="l157" style="background-color: #ffffff">		class _Tr&gt;</a>
+   158) <a name="l158" style="background-color: #ffffff">		basic_ostream&lt;_Ch, _Tr&gt;&amp; _To_text(</a>
+   159) <a name="l159" style="background-color: #ffffff">			basic_ostream&lt;_Ch, _Tr&gt;&amp; _Str)</a>
+   160) <a name="l160" style="background-color: #ffffff">		{	// insert representation into stream</a>
+   161) <a name="l161" style="background-color: #ffffff">		return (_Str &lt;&lt; _Id);</a>
+   162) <a name="l162" style="background-color: #ffffff">		}</a>
+   163) <a name="l163" style="background-color: #ffffff"></a>
+   164) <a name="l164" style="background-color: #ffffff">private:</a>
+   165) <a name="l165" style="background-color: #ffffff">	id(_Thrd_id_t _Other_id)</a>
+   166) <a name="l166" style="background-color: #ffffff">		: _Id(_Other_id)</a>
+   167) <a name="l167" style="background-color: #ffffff">		{	// construct from unique id</a>
+   168) <a name="l168" style="background-color: #ffffff">		}</a>
+   169) <a name="l169" style="background-color: #ffffff"></a>
+   170) <a name="l170" style="background-color: #ffffff">	_Thrd_id_t _Id;</a>
+   171) <a name="l171" style="background-color: #ffffff"></a>
+   172) <a name="l172" style="background-color: #ffffff">	friend thread::id thread::get_id() const noexcept;</a>
+   173) <a name="l173" style="background-color: #ffffff">	friend thread::id this_thread::get_id() noexcept;</a>
+   174) <a name="l174" style="background-color: #ffffff">	friend bool operator==(thread::id _Left, thread::id _Right) noexcept;</a>
+   175) <a name="l175" style="background-color: #ffffff">	friend bool operator&lt;(thread::id _Left, thread::id _Right) noexcept;</a>
+   176) <a name="l176" style="background-color: #ffffff">	friend hash&lt;thread::id&gt;;</a>
+   177) <a name="l177" style="background-color: #ffffff">	};</a>
+   178) <a name="l178" style="background-color: #ffffff"></a>
+   179) <a name="l179" style="background-color: #ffffff">inline void thread::join()</a>
+   180) <a name="l180" style="background-color: #ffffff">	{	// join thread</a>
+   181) <a name="l181" style="background-color: #ffffff">	if (!joinable())</a>
+   182) <a name="l182" style="background-color: #ffff99">		_Throw_Cpp_error(_INVALID_ARGUMENT);</a>
+   183) <a name="l183" style="background-color: #ffff99">	const bool _Is_null </a><a style="background-color: #ffffff">= _Thr_is_null(_Thr);	// Avoid Clang -Wparentheses-equality</a>
+   184) <a name="l184" style="background-color: #ffffff">	if (_Is_null)</a>
+   185) <a name="l185" style="background-color: #ffff99">		_Throw_Cpp_error(_INVALID_ARGUMENT);</a>
+   186) <a name="l186" style="background-color: #ffffff">	if (get_id() == _STD this_thread::get_id())</a>
+   187) <a name="l187" style="background-color: #ffff99">		_Throw_Cpp_error(_RESOURCE_DEADLOCK_WOULD_OCCUR);</a>
+   188) <a name="l188" style="background-color: #ffffff">	if (_Thrd_join(_Thr, nullptr) != _Thrd_success)</a>
+   189) <a name="l189" style="background-color: #ffff99">		_Throw_Cpp_error(_NO_SUCH_PROCESS);</a>
+   190) <a name="l190" style="background-color: #ffffff">	_Thr_set_null(_Thr);</a>
+   191) <a name="l191" style="background-color: #ffffff">	}</a>
+   192) <a name="l192" style="background-color: #ffffff"></a>
+   193) <a name="l193" style="background-color: #ffffff">_NODISCARD inline thread::id thread::get_id() const noexcept</a>
+   194) <a name="l194" style="background-color: #ffffff">	{	// return id for this thread</a>
+   195) <a name="l195" style="background-color: #ffffff">	return (_Thr_val(_Thr));</a>
+   196) <a name="l196" style="background-color: #ffffff">	}</a>
+   197) <a name="l197" style="background-color: #ffffff"></a>
+   198) <a name="l198" style="background-color: #ffffff">_NODISCARD inline thread::id this_thread::get_id() noexcept</a>
+   199) <a name="l199" style="background-color: #ffffff">	{	// return id for current thread</a>
+   200) <a name="l200" style="background-color: #ffffff">	return (_Thrd_id());</a>
+   201) <a name="l201" style="background-color: #ffffff">	}</a>
+   202) <a name="l202" style="background-color: #ffffff"></a>
+   203) <a name="l203" style="background-color: #ffffff">inline void swap(thread&amp; _Left, thread&amp; _Right) noexcept</a>
+   204) <a name="l204" style="background-color: #ffffff">	{	// swap _Left with _Right</a>
+   205) <a name="l205" style="background-color: #ffffff">	_Left.swap(_Right);</a>
+   206) <a name="l206" style="background-color: #ffffff">	}</a>
+   207) <a name="l207" style="background-color: #ffffff"></a>
+   208) <a name="l208" style="background-color: #ffffff">_NODISCARD inline bool operator==(thread::id _Left, thread::id _Right) noexcept</a>
+   209) <a name="l209" style="background-color: #ffffff">	{	// return true if _Left and _Right identify the same thread</a>
+   210) <a name="l210" style="background-color: #ffffff">	return (_Left._Id == _Right._Id);</a>
+   211) <a name="l211" style="background-color: #ffffff">	}</a>
+   212) <a name="l212" style="background-color: #ffffff"></a>
+   213) <a name="l213" style="background-color: #ffffff">_NODISCARD inline bool operator!=(thread::id _Left, thread::id _Right) noexcept</a>
+   214) <a name="l214" style="background-color: #ffffff">	{	// return true if _Left and _Right do not identify the same thread</a>
+   215) <a name="l215" style="background-color: #ffffff">	return (!(_Left == _Right));</a>
+   216) <a name="l216" style="background-color: #ffffff">	}</a>
+   217) <a name="l217" style="background-color: #ffffff"></a>
+   218) <a name="l218" style="background-color: #ffffff">_NODISCARD inline bool operator&lt;(thread::id _Left, thread::id _Right) noexcept</a>
+   219) <a name="l219" style="background-color: #ffffff">	{	// return true if _Left precedes _Right</a>
+   220) <a name="l220" style="background-color: #ffffff">	return (_Left._Id &lt; _Right._Id);</a>
+   221) <a name="l221" style="background-color: #ffffff">	}</a>
+   222) <a name="l222" style="background-color: #ffffff"></a>
+   223) <a name="l223" style="background-color: #ffffff">_NODISCARD inline bool operator&lt;=(thread::id _Left, thread::id _Right) noexcept</a>
+   224) <a name="l224" style="background-color: #ffffff">	{	// return true if _Left precedes or equals _Right</a>
+   225) <a name="l225" style="background-color: #ffffff">	return (!(_Right &lt; _Left));</a>
+   226) <a name="l226" style="background-color: #ffffff">	}</a>
+   227) <a name="l227" style="background-color: #ffffff"></a>
+   228) <a name="l228" style="background-color: #ffffff">_NODISCARD inline bool operator&gt;(thread::id _Left, thread::id _Right) noexcept</a>
+   229) <a name="l229" style="background-color: #ffffff">	{	// return true if _Left follows _Right</a>
+   230) <a name="l230" style="background-color: #ffffff">	return (_Right &lt; _Left);</a>
+   231) <a name="l231" style="background-color: #ffffff">	}</a>
+   232) <a name="l232" style="background-color: #ffffff"></a>
+   233) <a name="l233" style="background-color: #ffffff">_NODISCARD inline bool operator&gt;=(thread::id _Left, thread::id _Right) noexcept</a>
+   234) <a name="l234" style="background-color: #ffffff">	{	// return true if _Left follows or equals _Right</a>
+   235) <a name="l235" style="background-color: #ffffff">	return (!(_Left &lt; _Right));</a>
+   236) <a name="l236" style="background-color: #ffffff">	}</a>
+   237) <a name="l237" style="background-color: #ffffff"></a>
+   238) <a name="l238" style="background-color: #ffffff">template&lt;class _Ch,</a>
+   239) <a name="l239" style="background-color: #ffffff">	class _Tr&gt;</a>
+   240) <a name="l240" style="background-color: #ffffff">	basic_ostream&lt;_Ch, _Tr&gt;&amp; operator&lt;&lt;(</a>
+   241) <a name="l241" style="background-color: #ffffff">		basic_ostream&lt;_Ch, _Tr&gt;&amp; _Str,</a>
+   242) <a name="l242" style="background-color: #ffffff">		thread::id _Id)</a>
+   243) <a name="l243" style="background-color: #ffffff">	{	// insert id into stream</a>
+   244) <a name="l244" style="background-color: #ffffff">	return (_Id._To_text(_Str));</a>
+   245) <a name="l245" style="background-color: #ffffff">	}</a>
+   246) <a name="l246" style="background-color: #ffffff"></a>
+   247) <a name="l247" style="background-color: #ffffff">	// STRUCT TEMPLATE SPECIALIZATION hash</a>
+   248) <a name="l248" style="background-color: #ffffff">template&lt;&gt;</a>
+   249) <a name="l249" style="background-color: #ffffff">	struct hash&lt;thread::id&gt;</a>
+   250) <a name="l250" style="background-color: #ffffff">	{	// hash functor for thread::id</a>
+   251) <a name="l251" style="background-color: #ffffff">	_CXX17_DEPRECATE_ADAPTOR_TYPEDEFS typedef thread::id argument_type;</a>
+   252) <a name="l252" style="background-color: #ffffff">	_CXX17_DEPRECATE_ADAPTOR_TYPEDEFS typedef size_t result_type;</a>
+   253) <a name="l253" style="background-color: #ffffff"></a>
+   254) <a name="l254" style="background-color: #ffffff">	_NODISCARD size_t operator()(const thread::id _Keyval) const noexcept</a>
+   255) <a name="l255" style="background-color: #ffffff">		{	// hash _Keyval to size_t value by pseudorandomizing transform</a>
+   256) <a name="l256" style="background-color: #ffffff">		return (_Hash_representation(_Keyval._Id));</a>
+   257) <a name="l257" style="background-color: #ffffff">		}</a>
+   258) <a name="l258" style="background-color: #ffffff">	};</a>
+   259) <a name="l259" style="background-color: #ffffff">_STD_END</a>
+   260) <a name="l260" style="background-color: #ffffff"></a>
+   261) <a name="l261" style="background-color: #ffffff"> #pragma pop_macro(&quot;new&quot;)</a>
+   262) <a name="l262" style="background-color: #ffffff"> _STL_RESTORE_CLANG_WARNINGS</a>
+   263) <a name="l263" style="background-color: #ffffff"> #pragma warning(pop)</a>
+   264) <a name="l264" style="background-color: #ffffff"> #pragma pack(pop)</a>
+   265) <a name="l265" style="background-color: #ffffff">#endif /* RC_INVOKED */</a>
+   266) <a name="l266" style="background-color: #ffffff">#endif /* _THREAD_ */</a>
+   267) <a name="l267" style="background-color: #ffffff"></a>
+   268) <a name="l268" style="background-color: #ffffff">/*</a>
+   269) <a name="l269" style="background-color: #ffffff"> * Copyright (c) by P.J. Plauger. All rights reserved.</a>
+   270) <a name="l270" style="background-color: #ffffff"> * Consult your license regarding permissions and restrictions.</a>
+   271) <a name="l271" style="background-color: #ffffff">V6.50:0009 */</a>
+</pre>
+<hr size=1 noshade>
+<table border=0 cellpadding=3 cellspacing=0 width="100%" style="color:black;font-weight:normal;font-family:Verdana,Arial;font-size:xx-small">
+<td width="50%">
+<table border=0 cellpadding=3 cellspacing=0>
+<tr>
+<td>
+<a target="_new" href="http://www.intel.com"><img src="__IntelR.gif" border="0"></a>
+</td>
+<td style="font-size:xx-small">
+<i>generated by </i><BR><a target="_new" href="http://software.intel.com">Intel(R) C++/Fortran Compiler code-coverage tool</a>
+</td>
+</tr>
+</table>
+</td>
+<td>
+<table border=0 cellpadding=3 cellspacing=0 width="50%">
+<tr><a>Web-Page Owner: <a href="mailto:nobody">Nobody</a></tr>
+</table>
+</td>
+</table>
+</body>
+</html>

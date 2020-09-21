@@ -1,0 +1,364 @@
+<html>
+<head>
+<title>Listing of GDIPLUSCOLOR.H</title>
+</head>
+<body bgcolor="FFFFFF">
+<h4>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;GDIPLUSCOLOR.H&#160;&#160;&#160;&#160;&#160;&#160;&#160;<font size=-1>coverage:&#160  0.00&#160;%func&#160;&#160;&#160;&#160;  0.00&#160;%block</font></h4>
+<hr size=1 noshade>
+<pre>
+     1) <a name="l1" style="background-color: #ffffff">/**************************************************************************\</a>
+     2) <a name="l2" style="background-color: #ffffff">*</a>
+     3) <a name="l3" style="background-color: #ffffff">* Copyright (c) 1998-2001, Microsoft Corp.  All Rights Reserved.</a>
+     4) <a name="l4" style="background-color: #ffffff">*</a>
+     5) <a name="l5" style="background-color: #ffffff">* Module Name:</a>
+     6) <a name="l6" style="background-color: #ffffff">*</a>
+     7) <a name="l7" style="background-color: #ffffff">*   GdiplusColor.h</a>
+     8) <a name="l8" style="background-color: #ffffff">*</a>
+     9) <a name="l9" style="background-color: #ffffff">* Abstract:</a>
+    10) <a name="l10" style="background-color: #ffffff">*</a>
+    11) <a name="l11" style="background-color: #ffffff">*   GDI+ Color Object</a>
+    12) <a name="l12" style="background-color: #ffffff">*</a>
+    13) <a name="l13" style="background-color: #ffffff">\**************************************************************************/</a>
+    14) <a name="l14" style="background-color: #ffffff"></a>
+    15) <a name="l15" style="background-color: #ffffff">#ifndef _GDIPLUSCOLOR_H</a>
+    16) <a name="l16" style="background-color: #ffffff">#define _GDIPLUSCOLOR_H</a>
+    17) <a name="l17" style="background-color: #ffffff">#include &lt;winapifamily.h&gt;</a>
+    18) <a name="l18" style="background-color: #ffffff"></a>
+    19) <a name="l19" style="background-color: #ffffff">#pragma region Desktop Family</a>
+    20) <a name="l20" style="background-color: #ffffff">#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)</a>
+    21) <a name="l21" style="background-color: #ffffff"></a>
+    22) <a name="l22" style="background-color: #ffffff"></a>
+    23) <a name="l23" style="background-color: #ffffff">//----------------------------------------------------------------------------</a>
+    24) <a name="l24" style="background-color: #ffffff">// Color mode</a>
+    25) <a name="l25" style="background-color: #ffffff">//----------------------------------------------------------------------------</a>
+    26) <a name="l26" style="background-color: #ffffff"></a>
+    27) <a name="l27" style="background-color: #ffffff">enum ColorMode</a>
+    28) <a name="l28" style="background-color: #ffffff">{</a>
+    29) <a name="l29" style="background-color: #ffffff">    ColorModeARGB32 = 0,</a>
+    30) <a name="l30" style="background-color: #ffffff">    ColorModeARGB64 = 1</a>
+    31) <a name="l31" style="background-color: #ffffff">};</a>
+    32) <a name="l32" style="background-color: #ffffff"></a>
+    33) <a name="l33" style="background-color: #ffffff">//----------------------------------------------------------------------------</a>
+    34) <a name="l34" style="background-color: #ffffff">// Color Channel flags</a>
+    35) <a name="l35" style="background-color: #ffffff">//----------------------------------------------------------------------------</a>
+    36) <a name="l36" style="background-color: #ffffff"></a>
+    37) <a name="l37" style="background-color: #ffffff">enum ColorChannelFlags</a>
+    38) <a name="l38" style="background-color: #ffffff">{</a>
+    39) <a name="l39" style="background-color: #ffffff">    ColorChannelFlagsC = 0,</a>
+    40) <a name="l40" style="background-color: #ffffff">    ColorChannelFlagsM,</a>
+    41) <a name="l41" style="background-color: #ffffff">    ColorChannelFlagsY,</a>
+    42) <a name="l42" style="background-color: #ffffff">    ColorChannelFlagsK,</a>
+    43) <a name="l43" style="background-color: #ffffff">    ColorChannelFlagsLast</a>
+    44) <a name="l44" style="background-color: #ffffff">};</a>
+    45) <a name="l45" style="background-color: #ffffff"></a>
+    46) <a name="l46" style="background-color: #ffffff">//----------------------------------------------------------------------------</a>
+    47) <a name="l47" style="background-color: #ffffff">// Color</a>
+    48) <a name="l48" style="background-color: #ffffff">//----------------------------------------------------------------------------</a>
+    49) <a name="l49" style="background-color: #ffffff"></a>
+    50) <a name="l50" style="background-color: #ffffff">class Color</a>
+    51) <a name="l51" style="background-color: #ffffff">{</a>
+    52) <a name="l52" style="background-color: #ffffff">public:</a>
+    53) <a name="l53" style="background-color: #ffffff"></a>
+    54) <a name="l54" style="background-color: #ffcccc">    Color()</a>
+    55) <a name="l55" style="background-color: #ffcccc">    {</a>
+    56) <a name="l56" style="background-color: #ffcccc">        Argb = (ARGB)Color::Black;</a>
+    57) <a name="l57" style="background-color: #ffcccc">    }</a>
+    58) <a name="l58" style="background-color: #ffffff"></a>
+    59) <a name="l59" style="background-color: #ffffff">    // Construct an opaque Color object with</a>
+    60) <a name="l60" style="background-color: #ffffff">    // the specified Red, Green, Blue values.</a>
+    61) <a name="l61" style="background-color: #ffffff">    //</a>
+    62) <a name="l62" style="background-color: #ffffff">    // Color values are not premultiplied.</a>
+    63) <a name="l63" style="background-color: #ffffff"></a>
+    64) <a name="l64" style="background-color: #ffffff">    Color(IN BYTE r,</a>
+    65) <a name="l65" style="background-color: #ffffff">          IN BYTE g,</a>
+    66) <a name="l66" style="background-color: #ffffff">          IN BYTE b)</a>
+    67) <a name="l67" style="background-color: #ffffff">    {</a>
+    68) <a name="l68" style="background-color: #ffffff">        Argb = MakeARGB(255, r, g, b);</a>
+    69) <a name="l69" style="background-color: #ffffff">    }</a>
+    70) <a name="l70" style="background-color: #ffffff"></a>
+    71) <a name="l71" style="background-color: #ffffff">    Color(IN BYTE a,</a>
+    72) <a name="l72" style="background-color: #ffffff">          IN BYTE r,</a>
+    73) <a name="l73" style="background-color: #ffffff">          IN BYTE g,</a>
+    74) <a name="l74" style="background-color: #ffffff">          IN BYTE b)</a>
+    75) <a name="l75" style="background-color: #ffffff">    {</a>
+    76) <a name="l76" style="background-color: #ffffff">        Argb = MakeARGB(a, r, g, b);</a>
+    77) <a name="l77" style="background-color: #ffffff">    }</a>
+    78) <a name="l78" style="background-color: #ffffff"></a>
+    79) <a name="l79" style="background-color: #ffffff">    Color(IN ARGB argb)</a>
+    80) <a name="l80" style="background-color: #ffffff">    {</a>
+    81) <a name="l81" style="background-color: #ffffff">        Argb = argb;</a>
+    82) <a name="l82" style="background-color: #ffffff">    }</a>
+    83) <a name="l83" style="background-color: #ffffff"></a>
+    84) <a name="l84" style="background-color: #ffffff">    BYTE </a><a style="background-color: #ffcccc">GetAlpha() const</a>
+    85) <a name="l85" style="background-color: #ffcccc">    {</a>
+    86) <a name="l86" style="background-color: #ffcccc">        return (BYTE) (Argb &gt;&gt; AlphaShift);</a>
+    87) <a name="l87" style="background-color: #ffcccc">    }</a>
+    88) <a name="l88" style="background-color: #ffffff"></a>
+    89) <a name="l89" style="background-color: #ffffff">    BYTE GetA() const</a>
+    90) <a name="l90" style="background-color: #ffffff">    {</a>
+    91) <a name="l91" style="background-color: #ffffff">        return GetAlpha();</a>
+    92) <a name="l92" style="background-color: #ffffff">    }</a>
+    93) <a name="l93" style="background-color: #ffffff"></a>
+    94) <a name="l94" style="background-color: #ffffff">    BYTE </a><a style="background-color: #ffcccc">GetRed() const</a>
+    95) <a name="l95" style="background-color: #ffcccc">    {</a>
+    96) <a name="l96" style="background-color: #ffcccc">        return (BYTE) (Argb &gt;&gt; RedShift);</a>
+    97) <a name="l97" style="background-color: #ffcccc">    }</a>
+    98) <a name="l98" style="background-color: #ffffff"></a>
+    99) <a name="l99" style="background-color: #ffffff">    BYTE GetR() const</a>
+   100) <a name="l100" style="background-color: #ffffff">    {</a>
+   101) <a name="l101" style="background-color: #ffffff">        return GetRed();</a>
+   102) <a name="l102" style="background-color: #ffffff">    }</a>
+   103) <a name="l103" style="background-color: #ffffff"></a>
+   104) <a name="l104" style="background-color: #ffffff">    BYTE </a><a style="background-color: #ffcccc">GetGreen() const</a>
+   105) <a name="l105" style="background-color: #ffcccc">    {</a>
+   106) <a name="l106" style="background-color: #ffcccc">        return (BYTE) (Argb &gt;&gt; GreenShift);</a>
+   107) <a name="l107" style="background-color: #ffcccc">    }</a>
+   108) <a name="l108" style="background-color: #ffffff"></a>
+   109) <a name="l109" style="background-color: #ffffff">    BYTE GetG() const</a>
+   110) <a name="l110" style="background-color: #ffffff">    {</a>
+   111) <a name="l111" style="background-color: #ffffff">        return GetGreen();</a>
+   112) <a name="l112" style="background-color: #ffffff">    }</a>
+   113) <a name="l113" style="background-color: #ffffff"></a>
+   114) <a name="l114" style="background-color: #ffffff">    BYTE </a><a style="background-color: #ffcccc">GetBlue() const</a>
+   115) <a name="l115" style="background-color: #ffcccc">    {</a>
+   116) <a name="l116" style="background-color: #ffcccc">        return (BYTE) (Argb &gt;&gt; BlueShift);</a>
+   117) <a name="l117" style="background-color: #ffcccc">    }</a>
+   118) <a name="l118" style="background-color: #ffffff"></a>
+   119) <a name="l119" style="background-color: #ffffff">    BYTE GetB() const</a>
+   120) <a name="l120" style="background-color: #ffffff">    {</a>
+   121) <a name="l121" style="background-color: #ffffff">        return GetBlue();</a>
+   122) <a name="l122" style="background-color: #ffffff">    }</a>
+   123) <a name="l123" style="background-color: #ffffff"></a>
+   124) <a name="l124" style="background-color: #ffffff">    ARGB GetValue() const</a>
+   125) <a name="l125" style="background-color: #ffffff">    {</a>
+   126) <a name="l126" style="background-color: #ffffff">        return Argb;</a>
+   127) <a name="l127" style="background-color: #ffffff">    }</a>
+   128) <a name="l128" style="background-color: #ffffff"></a>
+   129) <a name="l129" style="background-color: #ffffff">    VOID </a><a style="background-color: #ffcccc">SetValue(IN ARGB argb)</a>
+   130) <a name="l130" style="background-color: #ffcccc">    {</a>
+   131) <a name="l131" style="background-color: #ffcccc">        Argb = argb;</a>
+   132) <a name="l132" style="background-color: #ffcccc">    }</a>
+   133) <a name="l133" style="background-color: #ffffff"></a>
+   134) <a name="l134" style="background-color: #ffffff">    VOID SetFromCOLORREF(IN COLORREF rgb)</a>
+   135) <a name="l135" style="background-color: #ffffff">    {</a>
+   136) <a name="l136" style="background-color: #ffffff">        Argb = MakeARGB(255, GetRValue(rgb), GetGValue(rgb), GetBValue(rgb));</a>
+   137) <a name="l137" style="background-color: #ffffff">    }</a>
+   138) <a name="l138" style="background-color: #ffffff"></a>
+   139) <a name="l139" style="background-color: #ffffff">    COLORREF ToCOLORREF() const</a>
+   140) <a name="l140" style="background-color: #ffffff">    {</a>
+   141) <a name="l141" style="background-color: #ffffff">        return RGB(GetRed(), GetGreen(), GetBlue());</a>
+   142) <a name="l142" style="background-color: #ffffff">    }</a>
+   143) <a name="l143" style="background-color: #ffffff"></a>
+   144) <a name="l144" style="background-color: #ffffff">public:</a>
+   145) <a name="l145" style="background-color: #ffffff"></a>
+   146) <a name="l146" style="background-color: #ffffff">    // Common color constants</a>
+   147) <a name="l147" style="background-color: #ffffff">    </a>
+   148) <a name="l148" style="background-color: #ffffff">    enum</a>
+   149) <a name="l149" style="background-color: #ffffff">    {</a>
+   150) <a name="l150" style="background-color: #ffffff">        AliceBlue            = 0xFFF0F8FF,</a>
+   151) <a name="l151" style="background-color: #ffffff">        AntiqueWhite         = 0xFFFAEBD7,</a>
+   152) <a name="l152" style="background-color: #ffffff">        Aqua                 = 0xFF00FFFF,</a>
+   153) <a name="l153" style="background-color: #ffffff">        Aquamarine           = 0xFF7FFFD4,</a>
+   154) <a name="l154" style="background-color: #ffffff">        Azure                = 0xFFF0FFFF,</a>
+   155) <a name="l155" style="background-color: #ffffff">        Beige                = 0xFFF5F5DC,</a>
+   156) <a name="l156" style="background-color: #ffffff">        Bisque               = 0xFFFFE4C4,</a>
+   157) <a name="l157" style="background-color: #ffffff">        Black                = 0xFF000000,</a>
+   158) <a name="l158" style="background-color: #ffffff">        BlanchedAlmond       = 0xFFFFEBCD,</a>
+   159) <a name="l159" style="background-color: #ffffff">        Blue                 = 0xFF0000FF,</a>
+   160) <a name="l160" style="background-color: #ffffff">        BlueViolet           = 0xFF8A2BE2,</a>
+   161) <a name="l161" style="background-color: #ffffff">        Brown                = 0xFFA52A2A,</a>
+   162) <a name="l162" style="background-color: #ffffff">        BurlyWood            = 0xFFDEB887,</a>
+   163) <a name="l163" style="background-color: #ffffff">        CadetBlue            = 0xFF5F9EA0,</a>
+   164) <a name="l164" style="background-color: #ffffff">        Chartreuse           = 0xFF7FFF00,</a>
+   165) <a name="l165" style="background-color: #ffffff">        Chocolate            = 0xFFD2691E,</a>
+   166) <a name="l166" style="background-color: #ffffff">        Coral                = 0xFFFF7F50,</a>
+   167) <a name="l167" style="background-color: #ffffff">        CornflowerBlue       = 0xFF6495ED,</a>
+   168) <a name="l168" style="background-color: #ffffff">        Cornsilk             = 0xFFFFF8DC,</a>
+   169) <a name="l169" style="background-color: #ffffff">        Crimson              = 0xFFDC143C,</a>
+   170) <a name="l170" style="background-color: #ffffff">        Cyan                 = 0xFF00FFFF,</a>
+   171) <a name="l171" style="background-color: #ffffff">        DarkBlue             = 0xFF00008B,</a>
+   172) <a name="l172" style="background-color: #ffffff">        DarkCyan             = 0xFF008B8B,</a>
+   173) <a name="l173" style="background-color: #ffffff">        DarkGoldenrod        = 0xFFB8860B,</a>
+   174) <a name="l174" style="background-color: #ffffff">        DarkGray             = 0xFFA9A9A9,</a>
+   175) <a name="l175" style="background-color: #ffffff">        DarkGreen            = 0xFF006400,</a>
+   176) <a name="l176" style="background-color: #ffffff">        DarkKhaki            = 0xFFBDB76B,</a>
+   177) <a name="l177" style="background-color: #ffffff">        DarkMagenta          = 0xFF8B008B,</a>
+   178) <a name="l178" style="background-color: #ffffff">        DarkOliveGreen       = 0xFF556B2F,</a>
+   179) <a name="l179" style="background-color: #ffffff">        DarkOrange           = 0xFFFF8C00,</a>
+   180) <a name="l180" style="background-color: #ffffff">        DarkOrchid           = 0xFF9932CC,</a>
+   181) <a name="l181" style="background-color: #ffffff">        DarkRed              = 0xFF8B0000,</a>
+   182) <a name="l182" style="background-color: #ffffff">        DarkSalmon           = 0xFFE9967A,</a>
+   183) <a name="l183" style="background-color: #ffffff">        DarkSeaGreen         = 0xFF8FBC8B,</a>
+   184) <a name="l184" style="background-color: #ffffff">        DarkSlateBlue        = 0xFF483D8B,</a>
+   185) <a name="l185" style="background-color: #ffffff">        DarkSlateGray        = 0xFF2F4F4F,</a>
+   186) <a name="l186" style="background-color: #ffffff">        DarkTurquoise        = 0xFF00CED1,</a>
+   187) <a name="l187" style="background-color: #ffffff">        DarkViolet           = 0xFF9400D3,</a>
+   188) <a name="l188" style="background-color: #ffffff">        DeepPink             = 0xFFFF1493,</a>
+   189) <a name="l189" style="background-color: #ffffff">        DeepSkyBlue          = 0xFF00BFFF,</a>
+   190) <a name="l190" style="background-color: #ffffff">        DimGray              = 0xFF696969,</a>
+   191) <a name="l191" style="background-color: #ffffff">        DodgerBlue           = 0xFF1E90FF,</a>
+   192) <a name="l192" style="background-color: #ffffff">        Firebrick            = 0xFFB22222,</a>
+   193) <a name="l193" style="background-color: #ffffff">        FloralWhite          = 0xFFFFFAF0,</a>
+   194) <a name="l194" style="background-color: #ffffff">        ForestGreen          = 0xFF228B22,</a>
+   195) <a name="l195" style="background-color: #ffffff">        Fuchsia              = 0xFFFF00FF,</a>
+   196) <a name="l196" style="background-color: #ffffff">        Gainsboro            = 0xFFDCDCDC,</a>
+   197) <a name="l197" style="background-color: #ffffff">        GhostWhite           = 0xFFF8F8FF,</a>
+   198) <a name="l198" style="background-color: #ffffff">        Gold                 = 0xFFFFD700,</a>
+   199) <a name="l199" style="background-color: #ffffff">        Goldenrod            = 0xFFDAA520,</a>
+   200) <a name="l200" style="background-color: #ffffff">        Gray                 = 0xFF808080,</a>
+   201) <a name="l201" style="background-color: #ffffff">        Green                = 0xFF008000,</a>
+   202) <a name="l202" style="background-color: #ffffff">        GreenYellow          = 0xFFADFF2F,</a>
+   203) <a name="l203" style="background-color: #ffffff">        Honeydew             = 0xFFF0FFF0,</a>
+   204) <a name="l204" style="background-color: #ffffff">        HotPink              = 0xFFFF69B4,</a>
+   205) <a name="l205" style="background-color: #ffffff">        IndianRed            = 0xFFCD5C5C,</a>
+   206) <a name="l206" style="background-color: #ffffff">        Indigo               = 0xFF4B0082,</a>
+   207) <a name="l207" style="background-color: #ffffff">        Ivory                = 0xFFFFFFF0,</a>
+   208) <a name="l208" style="background-color: #ffffff">        Khaki                = 0xFFF0E68C,</a>
+   209) <a name="l209" style="background-color: #ffffff">        Lavender             = 0xFFE6E6FA,</a>
+   210) <a name="l210" style="background-color: #ffffff">        LavenderBlush        = 0xFFFFF0F5,</a>
+   211) <a name="l211" style="background-color: #ffffff">        LawnGreen            = 0xFF7CFC00,</a>
+   212) <a name="l212" style="background-color: #ffffff">        LemonChiffon         = 0xFFFFFACD,</a>
+   213) <a name="l213" style="background-color: #ffffff">        LightBlue            = 0xFFADD8E6,</a>
+   214) <a name="l214" style="background-color: #ffffff">        LightCoral           = 0xFFF08080,</a>
+   215) <a name="l215" style="background-color: #ffffff">        LightCyan            = 0xFFE0FFFF,</a>
+   216) <a name="l216" style="background-color: #ffffff">        LightGoldenrodYellow = 0xFFFAFAD2,</a>
+   217) <a name="l217" style="background-color: #ffffff">        LightGray            = 0xFFD3D3D3,</a>
+   218) <a name="l218" style="background-color: #ffffff">        LightGreen           = 0xFF90EE90,</a>
+   219) <a name="l219" style="background-color: #ffffff">        LightPink            = 0xFFFFB6C1,</a>
+   220) <a name="l220" style="background-color: #ffffff">        LightSalmon          = 0xFFFFA07A,</a>
+   221) <a name="l221" style="background-color: #ffffff">        LightSeaGreen        = 0xFF20B2AA,</a>
+   222) <a name="l222" style="background-color: #ffffff">        LightSkyBlue         = 0xFF87CEFA,</a>
+   223) <a name="l223" style="background-color: #ffffff">        LightSlateGray       = 0xFF778899,</a>
+   224) <a name="l224" style="background-color: #ffffff">        LightSteelBlue       = 0xFFB0C4DE,</a>
+   225) <a name="l225" style="background-color: #ffffff">        LightYellow          = 0xFFFFFFE0,</a>
+   226) <a name="l226" style="background-color: #ffffff">        Lime                 = 0xFF00FF00,</a>
+   227) <a name="l227" style="background-color: #ffffff">        LimeGreen            = 0xFF32CD32,</a>
+   228) <a name="l228" style="background-color: #ffffff">        Linen                = 0xFFFAF0E6,</a>
+   229) <a name="l229" style="background-color: #ffffff">        Magenta              = 0xFFFF00FF,</a>
+   230) <a name="l230" style="background-color: #ffffff">        Maroon               = 0xFF800000,</a>
+   231) <a name="l231" style="background-color: #ffffff">        MediumAquamarine     = 0xFF66CDAA,</a>
+   232) <a name="l232" style="background-color: #ffffff">        MediumBlue           = 0xFF0000CD,</a>
+   233) <a name="l233" style="background-color: #ffffff">        MediumOrchid         = 0xFFBA55D3,</a>
+   234) <a name="l234" style="background-color: #ffffff">        MediumPurple         = 0xFF9370DB,</a>
+   235) <a name="l235" style="background-color: #ffffff">        MediumSeaGreen       = 0xFF3CB371,</a>
+   236) <a name="l236" style="background-color: #ffffff">        MediumSlateBlue      = 0xFF7B68EE,</a>
+   237) <a name="l237" style="background-color: #ffffff">        MediumSpringGreen    = 0xFF00FA9A,</a>
+   238) <a name="l238" style="background-color: #ffffff">        MediumTurquoise      = 0xFF48D1CC,</a>
+   239) <a name="l239" style="background-color: #ffffff">        MediumVioletRed      = 0xFFC71585,</a>
+   240) <a name="l240" style="background-color: #ffffff">        MidnightBlue         = 0xFF191970,</a>
+   241) <a name="l241" style="background-color: #ffffff">        MintCream            = 0xFFF5FFFA,</a>
+   242) <a name="l242" style="background-color: #ffffff">        MistyRose            = 0xFFFFE4E1,</a>
+   243) <a name="l243" style="background-color: #ffffff">        Moccasin             = 0xFFFFE4B5,</a>
+   244) <a name="l244" style="background-color: #ffffff">        NavajoWhite          = 0xFFFFDEAD,</a>
+   245) <a name="l245" style="background-color: #ffffff">        Navy                 = 0xFF000080,</a>
+   246) <a name="l246" style="background-color: #ffffff">        OldLace              = 0xFFFDF5E6,</a>
+   247) <a name="l247" style="background-color: #ffffff">        Olive                = 0xFF808000,</a>
+   248) <a name="l248" style="background-color: #ffffff">        OliveDrab            = 0xFF6B8E23,</a>
+   249) <a name="l249" style="background-color: #ffffff">        Orange               = 0xFFFFA500,</a>
+   250) <a name="l250" style="background-color: #ffffff">        OrangeRed            = 0xFFFF4500,</a>
+   251) <a name="l251" style="background-color: #ffffff">        Orchid               = 0xFFDA70D6,</a>
+   252) <a name="l252" style="background-color: #ffffff">        PaleGoldenrod        = 0xFFEEE8AA,</a>
+   253) <a name="l253" style="background-color: #ffffff">        PaleGreen            = 0xFF98FB98,</a>
+   254) <a name="l254" style="background-color: #ffffff">        PaleTurquoise        = 0xFFAFEEEE,</a>
+   255) <a name="l255" style="background-color: #ffffff">        PaleVioletRed        = 0xFFDB7093,</a>
+   256) <a name="l256" style="background-color: #ffffff">        PapayaWhip           = 0xFFFFEFD5,</a>
+   257) <a name="l257" style="background-color: #ffffff">        PeachPuff            = 0xFFFFDAB9,</a>
+   258) <a name="l258" style="background-color: #ffffff">        Peru                 = 0xFFCD853F,</a>
+   259) <a name="l259" style="background-color: #ffffff">        Pink                 = 0xFFFFC0CB,</a>
+   260) <a name="l260" style="background-color: #ffffff">        Plum                 = 0xFFDDA0DD,</a>
+   261) <a name="l261" style="background-color: #ffffff">        PowderBlue           = 0xFFB0E0E6,</a>
+   262) <a name="l262" style="background-color: #ffffff">        Purple               = 0xFF800080,</a>
+   263) <a name="l263" style="background-color: #ffffff">        Red                  = 0xFFFF0000,</a>
+   264) <a name="l264" style="background-color: #ffffff">        RosyBrown            = 0xFFBC8F8F,</a>
+   265) <a name="l265" style="background-color: #ffffff">        RoyalBlue            = 0xFF4169E1,</a>
+   266) <a name="l266" style="background-color: #ffffff">        SaddleBrown          = 0xFF8B4513,</a>
+   267) <a name="l267" style="background-color: #ffffff">        Salmon               = 0xFFFA8072,</a>
+   268) <a name="l268" style="background-color: #ffffff">        SandyBrown           = 0xFFF4A460,</a>
+   269) <a name="l269" style="background-color: #ffffff">        SeaGreen             = 0xFF2E8B57,</a>
+   270) <a name="l270" style="background-color: #ffffff">        SeaShell             = 0xFFFFF5EE,</a>
+   271) <a name="l271" style="background-color: #ffffff">        Sienna               = 0xFFA0522D,</a>
+   272) <a name="l272" style="background-color: #ffffff">        Silver               = 0xFFC0C0C0,</a>
+   273) <a name="l273" style="background-color: #ffffff">        SkyBlue              = 0xFF87CEEB,</a>
+   274) <a name="l274" style="background-color: #ffffff">        SlateBlue            = 0xFF6A5ACD,</a>
+   275) <a name="l275" style="background-color: #ffffff">        SlateGray            = 0xFF708090,</a>
+   276) <a name="l276" style="background-color: #ffffff">        Snow                 = 0xFFFFFAFA,</a>
+   277) <a name="l277" style="background-color: #ffffff">        SpringGreen          = 0xFF00FF7F,</a>
+   278) <a name="l278" style="background-color: #ffffff">        SteelBlue            = 0xFF4682B4,</a>
+   279) <a name="l279" style="background-color: #ffffff">        Tan                  = 0xFFD2B48C,</a>
+   280) <a name="l280" style="background-color: #ffffff">        Teal                 = 0xFF008080,</a>
+   281) <a name="l281" style="background-color: #ffffff">        Thistle              = 0xFFD8BFD8,</a>
+   282) <a name="l282" style="background-color: #ffffff">        Tomato               = 0xFFFF6347,</a>
+   283) <a name="l283" style="background-color: #ffffff">        Transparent          = 0x00FFFFFF,</a>
+   284) <a name="l284" style="background-color: #ffffff">        Turquoise            = 0xFF40E0D0,</a>
+   285) <a name="l285" style="background-color: #ffffff">        Violet               = 0xFFEE82EE,</a>
+   286) <a name="l286" style="background-color: #ffffff">        Wheat                = 0xFFF5DEB3,</a>
+   287) <a name="l287" style="background-color: #ffffff">        White                = 0xFFFFFFFF,</a>
+   288) <a name="l288" style="background-color: #ffffff">        WhiteSmoke           = 0xFFF5F5F5,</a>
+   289) <a name="l289" style="background-color: #ffffff">        Yellow               = 0xFFFFFF00,</a>
+   290) <a name="l290" style="background-color: #ffffff">        YellowGreen          = 0xFF9ACD32</a>
+   291) <a name="l291" style="background-color: #ffffff">    };</a>
+   292) <a name="l292" style="background-color: #ffffff"></a>
+   293) <a name="l293" style="background-color: #ffffff">    // Shift count and bit mask for A, R, G, B components</a>
+   294) <a name="l294" style="background-color: #ffffff">    </a>
+   295) <a name="l295" style="background-color: #ffffff">    enum</a>
+   296) <a name="l296" style="background-color: #ffffff">    {</a>
+   297) <a name="l297" style="background-color: #ffffff">        AlphaShift  = 24,</a>
+   298) <a name="l298" style="background-color: #ffffff">        RedShift    = 16,</a>
+   299) <a name="l299" style="background-color: #ffffff">        GreenShift  = 8,</a>
+   300) <a name="l300" style="background-color: #ffffff">        BlueShift   = 0</a>
+   301) <a name="l301" style="background-color: #ffffff">    };</a>
+   302) <a name="l302" style="background-color: #ffffff"></a>
+   303) <a name="l303" style="background-color: #ffffff">    enum</a>
+   304) <a name="l304" style="background-color: #ffffff">    {</a>
+   305) <a name="l305" style="background-color: #ffffff">        AlphaMask   = 0xff000000,</a>
+   306) <a name="l306" style="background-color: #ffffff">        RedMask     = 0x00ff0000,</a>
+   307) <a name="l307" style="background-color: #ffffff">        GreenMask   = 0x0000ff00,</a>
+   308) <a name="l308" style="background-color: #ffffff">        BlueMask    = 0x000000ff</a>
+   309) <a name="l309" style="background-color: #ffffff">    };</a>
+   310) <a name="l310" style="background-color: #ffffff"></a>
+   311) <a name="l311" style="background-color: #ffffff">    // Assemble A, R, G, B values into a 32-bit integer</a>
+   312) <a name="l312" style="background-color: #ffffff">    </a>
+   313) <a name="l313" style="background-color: #ffffff">    static ARGB MakeARGB(IN BYTE a,</a>
+   314) <a name="l314" style="background-color: #ffffff">                         IN BYTE r,</a>
+   315) <a name="l315" style="background-color: #ffffff">                         IN BYTE g,</a>
+   316) <a name="l316" style="background-color: #ffffff">                         IN BYTE b)</a>
+   317) <a name="l317" style="background-color: #ffffff">    {</a>
+   318) <a name="l318" style="background-color: #ffffff">        return (((ARGB) (b) &lt;&lt;  BlueShift) |</a>
+   319) <a name="l319" style="background-color: #ffffff">                ((ARGB) (g) &lt;&lt; GreenShift) |</a>
+   320) <a name="l320" style="background-color: #ffffff">                ((ARGB) (r) &lt;&lt;   RedShift) |</a>
+   321) <a name="l321" style="background-color: #ffffff">                ((ARGB) (a) &lt;&lt; AlphaShift));</a>
+   322) <a name="l322" style="background-color: #ffffff">    }</a>
+   323) <a name="l323" style="background-color: #ffffff"></a>
+   324) <a name="l324" style="background-color: #ffffff">protected:</a>
+   325) <a name="l325" style="background-color: #ffffff"></a>
+   326) <a name="l326" style="background-color: #ffffff">    ARGB Argb;</a>
+   327) <a name="l327" style="background-color: #ffffff">};</a>
+   328) <a name="l328" style="background-color: #ffffff"></a>
+   329) <a name="l329" style="background-color: #ffffff"></a>
+   330) <a name="l330" style="background-color: #ffffff">#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */</a>
+   331) <a name="l331" style="background-color: #ffffff">#pragma endregion</a>
+   332) <a name="l332" style="background-color: #ffffff"></a>
+   333) <a name="l333" style="background-color: #ffffff">#endif</a>
+</pre>
+<hr size=1 noshade>
+<table border=0 cellpadding=3 cellspacing=0 width="100%" style="color:black;font-weight:normal;font-family:Verdana,Arial;font-size:xx-small">
+<td width="50%">
+<table border=0 cellpadding=3 cellspacing=0>
+<tr>
+<td>
+<a target="_new" href="http://www.intel.com"><img src="__IntelR.gif" border="0"></a>
+</td>
+<td style="font-size:xx-small">
+<i>generated by </i><BR><a target="_new" href="http://software.intel.com">Intel(R) C++/Fortran Compiler code-coverage tool</a>
+</td>
+</tr>
+</table>
+</td>
+<td>
+<table border=0 cellpadding=3 cellspacing=0 width="50%">
+<tr><a>Web-Page Owner: <a href="mailto:nobody">Nobody</a></tr>
+</table>
+</td>
+</table>
+</body>
+</html>
