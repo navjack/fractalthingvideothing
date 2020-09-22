@@ -64,7 +64,7 @@
 #include <cstdlib>
 #include <immintrin.h>
 
-constexpr int nMaxThreads = 256;
+constexpr int nMaxThreads = 96;
 
 class olcFractalExplorer : public olc::PixelGameEngine
 {
@@ -109,122 +109,6 @@ public:
 		return true;
 	}
 
-	// Method 1) - Super simple, no effort at optimising
-	void CreateFractalBasic(const olc::vi2d& pix_tl, const olc::vi2d& pix_br, const olc::vd2d& frac_tl, const olc::vd2d& frac_br, const int iterations)
-	{
-		double x_scale = (frac_br.x - frac_tl.x) / (double(pix_br.x) - double(pix_tl.x));
-		double y_scale = (frac_br.y - frac_tl.y) / (double(pix_br.y) - double(pix_tl.y));
-
-		for (int y = pix_tl.y; y < pix_br.y; y++)
-		{
-			for (int x = pix_tl.x; x < pix_br.x; x++)
-			{
-				std::complex<double> c(x * x_scale + frac_tl.x, y * y_scale + frac_tl.y);
-				std::complex<double> z(0, 0);
-
-				int n = 0;
-				while (abs(z) < 2.0 && n < iterations)
-				{
-					z = (z * z) + c;
-					n++;
-				}
-
-				pFractal[y * ScreenWidth() + x] = n;
-			}
-		}
-	}
-
-	// Method 2) - Attempt to pre-calculate as much as possible, and reduce
-	// repeated multiplications
-	void CreateFractalPreCalculate(const olc::vi2d& pix_tl, const olc::vi2d& pix_br, const olc::vd2d& frac_tl, const olc::vd2d& frac_br, const int iterations)
-	{
-		double x_scale = (frac_br.x - frac_tl.x) / (double(pix_br.x) - double(pix_tl.x));
-		double y_scale = (frac_br.y - frac_tl.y) / (double(pix_br.y) - double(pix_tl.y));
-
-		double x_pos = frac_tl.x;
-		double y_pos = frac_tl.y;
-
-		int y_offset = 0;
-		int row_size = pix_br.x - pix_tl.x;
-
-		int x, y, n;
-		std::complex<double> c, z;
-
-		for (y = pix_tl.y; y < pix_br.y; y++)
-		{
-			x_pos = frac_tl.x;
-			for (x = pix_tl.x; x < pix_br.x; x++)
-			{
-				c = { x_pos, y_pos };
-				z = { 0,0 };
-
-				n = 0;
-				while (abs(z) < 2.0 && n < iterations)
-				{
-					z = (z * z) + c;
-					n++;
-				}
-
-				pFractal[y_offset + x] = n;
-				x_pos += x_scale;
-			}
-
-			y_pos += y_scale;
-			y_offset += row_size;
-		}
-	}
-
-
-	// Method 3) - Replace std::complex with just hard coded mathematics
-	void CreateFractalNoComplex(const olc::vi2d& pix_tl, const olc::vi2d& pix_br, const olc::vd2d& frac_tl, const olc::vd2d& frac_br, const int iterations)
-	{
-		double x_scale = (frac_br.x - frac_tl.x) / (double(pix_br.x) - double(pix_tl.x));
-		double y_scale = (frac_br.y - frac_tl.y) / (double(pix_br.y) - double(pix_tl.y));
-
-		double x_pos = frac_tl.x;
-		double y_pos = frac_tl.y;
-
-		int y_offset = 0;
-		int row_size = ScreenWidth();
-
-		int x, y, n;
-
-		double cr = 0;
-		double ci = 0;
-		double zr = 0;
-		double zi = 0;
-		double re = 0;
-		double im = 0;
-
-		for (y = pix_tl.y; y < pix_br.y; y++)
-		{
-			x_pos = frac_tl.x;
-			ci = y_pos;
-			for (x = pix_tl.x; x < pix_br.x; x++)
-			{
-				cr = x_pos;
-				zr = 0;
-				zi = 0;
-
-				n = 0;
-				while ((zr * zr + zi * zi) < 4.0 && n < iterations)
-				{
-					re = zr * zr - zi * zi + cr;
-					im = zr * zi * 2.0 + ci;
-					zr = re;
-					zi = im;
-					n++;
-				}
-
-				pFractal[y_offset + x] = n;
-				x_pos += x_scale;
-			}
-
-			y_pos += y_scale;
-			y_offset += row_size;
-		}
-	}
-
 	// Method 4) - Use AVX2 Vector co-processor to handle 4 fractal locations at once
 	void CreateFractalIntrinsics(const olc::vi2d& pix_tl, const olc::vi2d& pix_br, const olc::vd2d& frac_tl, const olc::vd2d& frac_br, const int iterations)
 	{
@@ -261,6 +145,7 @@ public:
 			_x_pos = _mm256_add_pd(_a, _x_pos_offsets);
 
 			_ci = _mm256_set1_pd(y_pos);
+
 
 			for (x = pix_tl.x; x < pix_br.x; x += 4)
 			{
@@ -519,9 +404,6 @@ public:
 		// Do the computation
 		switch (nMode)
 		{
-		case 0: CreateFractalBasic(pix_tl, pix_br, frac_tl, frac_br, nIterations); break;
-		case 1: CreateFractalPreCalculate(pix_tl, pix_br, frac_tl, frac_br, nIterations); break;
-		case 2: CreateFractalNoComplex(pix_tl, pix_br, frac_tl, frac_br, nIterations); break;
 		case 3: CreateFractalIntrinsics(pix_tl, pix_br, frac_tl, frac_br, nIterations); break;
 		case 4: CreateFractalThreads(pix_tl, pix_br, frac_tl, frac_br, nIterations); break;
 		case 5: CreateFractalThreadPool(pix_tl, pix_br, frac_tl, frac_br, nIterations); break;

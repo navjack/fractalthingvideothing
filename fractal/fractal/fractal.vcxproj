@@ -72,8 +72,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>N:\frac\intel-optimized\$(Configuration)\</OutDir>
-    <IntDir>N:\frac\intel-optimized\$(Configuration)\</IntDir>
+    <OutDir>C:\Users\jackm\Documents\fractalthingvideothing\intel-optimized\$(Configuration)\</OutDir>
+    <IntDir>C:\Users\jackm\Documents\fractalthingvideothing\intel-optimized\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

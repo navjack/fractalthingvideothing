@@ -1,30 +1,30 @@
 ﻿  Source.cpp
-n:\frac\fractal\fractal\olcpixelgameengine.h(966): warning C4068: unknown pragma
-n:\frac\fractal\fractal\olcpixelgameengine.h(1013): warning C4068: unknown pragma
-n:\frac\fractal\fractal\olcpixelgameengine.h(1014): warning C4083: expected '('; found identifier 'count'
-n:\frac\fractal\fractal\olcpixelgameengine.h(1016): warning C4083: expected '('; found identifier 'count'
-n:\frac\fractal\fractal\olcpixelgameengine.h(2659): warning C4068: unknown pragma
-n:\frac\fractal\fractal\olcpixelgameengine.h(3172): warning C4068: unknown pragma
-n:\frac\fractal\fractal\olcpixelgameengine.h(3173): warning C4003: not enough arguments for function-like macro invocation 'min'
-n:\frac\fractal\fractal\olcpixelgameengine.h(3173): warning C4083: expected '('; found identifier 'count'
-n:\frac\fractal\fractal\source.cpp(313): warning C4267: 'argument': conversion from 'size_t' to 'T', possible loss of data
+c:\users\jackm\documents\fractalthingvideothing\fractal\fractal\olcpixelgameengine.h(966): warning C4068: unknown pragma
+c:\users\jackm\documents\fractalthingvideothing\fractal\fractal\olcpixelgameengine.h(1013): warning C4068: unknown pragma
+c:\users\jackm\documents\fractalthingvideothing\fractal\fractal\olcpixelgameengine.h(1014): warning C4083: expected '('; found identifier 'count'
+c:\users\jackm\documents\fractalthingvideothing\fractal\fractal\olcpixelgameengine.h(1016): warning C4083: expected '('; found identifier 'count'
+c:\users\jackm\documents\fractalthingvideothing\fractal\fractal\olcpixelgameengine.h(2659): warning C4068: unknown pragma
+c:\users\jackm\documents\fractalthingvideothing\fractal\fractal\olcpixelgameengine.h(3172): warning C4068: unknown pragma
+c:\users\jackm\documents\fractalthingvideothing\fractal\fractal\olcpixelgameengine.h(3173): warning C4003: not enough arguments for function-like macro invocation 'min'
+c:\users\jackm\documents\fractalthingvideothing\fractal\fractal\olcpixelgameengine.h(3173): warning C4083: expected '('; found identifier 'count'
+c:\users\jackm\documents\fractalthingvideothing\fractal\fractal\source.cpp(198): warning C4267: 'argument': conversion from 'size_t' to 'T', possible loss of data
           with
           [
               T=int32_t
           ]
-n:\frac\fractal\fractal\source.cpp(314): warning C4267: 'argument': conversion from 'size_t' to 'T', possible loss of data
+c:\users\jackm\documents\fractalthingvideothing\fractal\fractal\source.cpp(199): warning C4267: 'argument': conversion from 'size_t' to 'T', possible loss of data
           with
           [
               T=int32_t
           ]
-n:\frac\fractal\fractal\source.cpp(455): warning C4267: 'argument': conversion from 'size_t' to 'T', possible loss of data
+c:\users\jackm\documents\fractalthingvideothing\fractal\fractal\source.cpp(340): warning C4267: 'argument': conversion from 'size_t' to 'T', possible loss of data
           with
           [
               T=int32_t
           ]
-n:\frac\fractal\fractal\source.cpp(456): warning C4267: 'argument': conversion from 'size_t' to 'T', possible loss of data
+c:\users\jackm\documents\fractalthingvideothing\fractal\fractal\source.cpp(341): warning C4267: 'argument': conversion from 'size_t' to 'T', possible loss of data
           with
           [
               T=int32_t
           ]
-  Project1.vcxproj -> N:\frac\generic\Release\fractal-generic.exe
+  Project1.vcxproj -> C:\Users\jackm\Documents\fractalthingvideothing\generic\Release\fractal-generic.exe
